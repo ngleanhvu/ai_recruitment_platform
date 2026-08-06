@@ -1,0 +1,18 @@
+server:
+  port: 8001
+  tomcat:
+    threads:
+      max: 10
+
+spring:
+  application:
+    name: candidate-service
+  data:
+    mongodb:
+      uri: mongodb://admin:admin123@localhost:27017/candidate_db?authSource=admin
+
+logging:
+  level:
+    root: INFO
+    org.mongodb.driver: WARN
+    org.springframework.data.mongodb: WARN
