@@ -1,10 +1,12 @@
 package com.ngleanhvu.domain.model.candidate;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
 
-@Getter
-@Setter
-public class Address {
-
+@Builder
+public record Address (
+        String address,
+        String district,
+        String country,
+        String city
+) {
 }

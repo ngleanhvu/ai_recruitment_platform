@@ -1,6 +1,7 @@
 package com.ngleanhvu.application.service.candidate.impl;
 
 import com.ngleanhvu.application.dto.request.CreateCandidateRequest;
+import com.ngleanhvu.application.dto.response.CandidateDetailResponse;
 import com.ngleanhvu.application.mapper.CandidateMapper;
 import com.ngleanhvu.application.service.candidate.CandidateAppService;
 import com.ngleanhvu.domain.model.candidate.Candidate;
@@ -18,6 +19,12 @@ public class CandidateAppServiceImpl implements CandidateAppService {
     @Override
     public void createCandidate(CreateCandidateRequest request) {
         Candidate candidate = candidateMapper.toDomain(request);
-        candidateDomainRepository.save(candidate);
+        candidateDomainRepository.createCandidate(candidate);
+    }
+
+    @Override
+    public CandidateDetailResponse getCandidateDetail(String candidateId) {
+        Candidate candidate = candidateDomainRepository.getCandidateDetail(candidateId);
+        return candidateMapper.toDetail(candidate);
     }
 }

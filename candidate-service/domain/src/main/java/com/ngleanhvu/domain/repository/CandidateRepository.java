@@ -4,4 +4,5 @@ import com.ngleanhvu.domain.model.candidate.Candidate;
 
 public interface CandidateRepository {
     void createCandidate(Candidate candidate);
+    Candidate getCandidateDetail(String id);
 }

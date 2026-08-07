@@ -9,6 +9,7 @@ import java.util.List;
 public record CandidateDetailResponse(
         String id,
         String summary,
+        String email,
         String status,
         Profile profile,
         Address address,

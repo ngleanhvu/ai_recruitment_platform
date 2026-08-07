@@ -1,0 +1,20 @@
+server:
+  port: ${CANDIDATE_SERVER_PORT}
+  tomcat:
+    threads:
+      max: 10
+
+spring:
+  application:
+    name: candidate-service
+
+logging:
+  level:
+    root: INFO
+    org.mongodb.driver: WARN
+    org.springframework.data.mongodb: WARN
+
+candidate:
+  mongodb:
+    uri: ${CANDIDATE_MONGO_URI}
+    database: ${CANDIDATE_MONGO_DATABASE}

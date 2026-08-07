@@ -6,14 +6,14 @@ import lombok.Builder;
 
 @Builder
 public record CreateCandidateRequest(
-        @NotBlank
+        @NotBlank(message = "First name must not be empty")
         String firstName,
 
-        @NotBlank
+        @NotBlank(message = "Last name must not be empty")
         String lastName,
 
-        @Email
-        @NotBlank
+        @Email(message = "Email is invalid")
+        @NotBlank(message = "Email must not be empty")
         String email,
         String phone,
         String summary

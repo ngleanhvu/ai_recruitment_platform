@@ -16,6 +16,8 @@ public class CandidateDocument extends BaseEntity {
     @Id
     private String id;
     private String userId;
+    private String email;
+    private String status;
     private Profile profile;
     private Address address;
     private String summary;
