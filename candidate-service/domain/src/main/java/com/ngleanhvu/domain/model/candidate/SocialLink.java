@@ -1,11 +1,6 @@
 package com.ngleanhvu.domain.model.candidate;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
 
-@Getter
-@Setter
-public class SocialLink {
-    private String type;
-    private String url;
-}
+@Builder
+public record SocialLink(String type, String url) {}

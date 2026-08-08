@@ -1,14 +1,14 @@
 package com.ngleanhvu.domain.model.candidate;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.ngleanhvu.shared.exception.ValidationException;
+import com.ngleanhvu.shared.util.ValidationUtil;
+import lombok.Builder;
 
-@Getter
-@Setter
-public class Profile {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private String avatarUrl;
+@Builder
+public record Profile(String firstName, String lastName, String phone, String avatarUrl) {
+  public Profile {
+    if (ValidationUtil.isEmpty(phone)) throw new ValidationException("Phone should not be empty");
+    if (phone.matches("^(03|05|07|08|09)\\\\d{8}$"))
+      throw new ValidationException("Phone is invalid");
+  }
 }

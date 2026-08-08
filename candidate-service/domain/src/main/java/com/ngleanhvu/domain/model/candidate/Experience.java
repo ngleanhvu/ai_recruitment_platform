@@ -1,17 +1,19 @@
 package com.ngleanhvu.domain.model.candidate;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import com.ngleanhvu.shared.exception.ValidationException;
 import java.time.LocalDate;
+import lombok.Builder;
 
-@Getter
-@Setter
-public class Experience {
-    private String company;
-    private String position;
-    private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean isCurrent;
+@Builder
+public record Experience(
+    String company,
+    String position,
+    String description,
+    LocalDate startDate,
+    LocalDate endDate,
+    boolean isCurrent) {
+  public Experience {
+    if (startDate().isAfter(endDate))
+      throw new ValidationException("Start date must be before end date");
+  }
 }

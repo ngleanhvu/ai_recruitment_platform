@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ExtractedSkill {
-    private String name;
-    private double confidence;
+  private String name;
+  private double confidence;
 }
