@@ -41,14 +41,12 @@ public class CandidateRepositoryImpl implements CandidateRepository {
   @Override
   public Optional<Candidate> findByEmail(Email email) {
     return candidateMongoRepository
-            .findByEmail(email.value())
-            .map(candidateDocumentMapper::toDomain);
+        .findByEmail(email.value())
+        .map(candidateDocumentMapper::toDomain);
   }
 
   @Override
   public boolean existByPhone(String phone) {
     return candidateMongoRepository.existByPhone(phone);
   }
-
-
 }

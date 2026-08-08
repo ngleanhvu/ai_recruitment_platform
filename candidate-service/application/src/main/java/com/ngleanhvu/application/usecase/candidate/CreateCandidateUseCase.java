@@ -14,7 +14,8 @@ public record CreateCandidateUseCase(
   public void execute(CreateCandidateRequest request) {
     Email email = new Email(request.email());
     if (candidateRepository.existByEmail(email))
-      throw new ResourceAlreadyExistException(String.format("Candidate with email %s already existed", request.email()));
+      throw new ResourceAlreadyExistException(
+          String.format("Candidate with email %s already existed", request.email()));
     Candidate candidate = candidateMapper.toDomain(request);
     candidateRepository.save(candidate);
   }

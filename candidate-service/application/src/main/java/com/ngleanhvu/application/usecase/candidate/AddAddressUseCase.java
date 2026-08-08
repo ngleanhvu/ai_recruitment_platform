@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public record AddAddressUseCase(
-        CandidateMapper candidateMapper,
-        CandidateRepository candidateRepository
-) {
-    public void execute(CandidateId candidateId, AddressRequest request) {
-        Address address = candidateMapper.toAddress(request);
-        Candidate candidate = candidateRepository.findById(candidateId)
-                .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
-        candidate.addAddress(address);
-    }
+    CandidateMapper candidateMapper, CandidateRepository candidateRepository) {
+  public void execute(CandidateId candidateId, AddressRequest request) {
+    Address address = candidateMapper.toAddress(request);
+    Candidate candidate =
+        candidateRepository
+            .findById(candidateId)
+            .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+    candidate.addAddress(address);
+  }
 }

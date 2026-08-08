@@ -1,7 +1,6 @@
 package com.ngleanhvu.domain.model.candidate;
 
 import com.ngleanhvu.shared.exception.DomainException;
-import com.ngleanhvu.shared.exception.ValidationException;
 import com.ngleanhvu.shared.util.ValidationUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,24 +101,20 @@ public final class Candidate {
   }
 
   public void updateProfile(Profile profile) {
-    if (ValidationUtil.isNull(profile))
-      return;
+    if (ValidationUtil.isNull(profile)) return;
 
     this.profile = profile;
   }
 
   public void updateEmail(Email email) {
-    if (ValidationUtil.isNull(email))
-      return;
+    if (ValidationUtil.isNull(email)) return;
     this.email = email;
   }
 
   public void addAddress(Address address) {
-    if (ValidationUtil.isNull(address))
-      return;
+    if (ValidationUtil.isNull(address)) return;
     this.address = address;
   }
-
 
   public void addSkills(List<Skill> newSkills) {
 

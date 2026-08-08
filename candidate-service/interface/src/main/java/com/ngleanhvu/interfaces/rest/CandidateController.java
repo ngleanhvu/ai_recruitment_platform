@@ -20,8 +20,7 @@ public record CandidateController(
     GetCandidateDetailUseCase getCandidateDetailUseCase,
     AddSkillForCandidateUseCase addSkillForCandidateUseCase,
     UpdateProfileUseCase updateProfileUseCase,
-    AddAddressUseCase addAddressUseCase
-) {
+    AddAddressUseCase addAddressUseCase) {
 
   @PostMapping("/create")
   public ApiResponse<Void> createCandidate(@RequestBody CreateCandidateRequest request) {
@@ -46,20 +45,16 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-profile")
   public ApiResponse<Void> updateProfile(
-          @RequestBody UpdateProfileRequest request,
-          @PathVariable("candidateId") CandidateId candidateId
-          ) {
+      @RequestBody UpdateProfileRequest request,
+      @PathVariable("candidateId") CandidateId candidateId) {
     updateProfileUseCase.execute(candidateId, request);
     return ApiResponse.success("Update profile success", null);
   }
 
   @PutMapping("/{candidateId}/add-address")
   public ApiResponse<Void> addAddress(
-          @RequestBody AddressRequest request,
-          @PathVariable("candidateId") CandidateId candidateId
-  ) {
+      @RequestBody AddressRequest request, @PathVariable("candidateId") CandidateId candidateId) {
     addAddressUseCase.execute(candidateId, request);
     return ApiResponse.success("Add address success", null);
   }
-
 }

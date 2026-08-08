@@ -48,18 +48,18 @@ public class CandidateMapper {
 
   public Profile toProfile(UpdateProfileRequest request) {
     return Profile.builder()
-            .phone(request.phone())
-            .firstName(request.firstName())
-            .lastName(request.lastName())
-            .build();
+        .phone(request.phone())
+        .firstName(request.firstName())
+        .lastName(request.lastName())
+        .build();
   }
 
   public Address toAddress(AddressRequest request) {
     return Address.builder()
-            .address(request.address())
-            .city(request.city())
-            .country(request.country())
-            .district(request.district())
-            .build();
+        .address(request.address())
+        .city(request.city())
+        .country(request.country())
+        .district(request.district())
+        .build();
   }
 }
