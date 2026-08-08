@@ -9,39 +9,36 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CandidateMapper {
-    public Candidate toDomain(CreateCandidateRequest request) {
-        return Candidate.create(
-                "",
-                request.email(),
-                request.firstName(),
-                request.lastName(),
-                request.phone(),
-                request.summary()
-        );
-    }
+  public Candidate toDomain(CreateCandidateRequest request) {
+    return Candidate.create(
+        "",
+        request.email(),
+        request.firstName(),
+        request.lastName(),
+        request.phone(),
+        request.summary());
+  }
 
-    public CandidateDetailResponse toDetail(Candidate candidate) {
-        return CandidateDetailResponse.builder()
-                .id(candidate.getId().value())
-                .profile(candidate.getProfile())
-                .educations(candidate.getEducations())
-                .address(candidate.getAddress())
-                .skills(candidate.getSkills())
-                .summary(candidate.getSummary())
-                .status(candidate.getStatus().name())
-                .experiences(candidate.getExperiences())
-                .socialLinks(candidate.getSocialLinks())
-                .email(candidate.getEmail().value())
-                .build();
-    }
+  public CandidateDetailResponse toDetail(Candidate candidate) {
+    return CandidateDetailResponse.builder()
+        .id(candidate.getId().value())
+        .profile(candidate.getProfile())
+        .educations(candidate.getEducations())
+        .address(candidate.getAddress())
+        .skills(candidate.getSkills())
+        .summary(candidate.getSummary())
+        .status(candidate.getStatus().name())
+        .experiences(candidate.getExperiences())
+        .socialLinks(candidate.getSocialLinks())
+        .email(candidate.getEmail().value())
+        .build();
+  }
 
-    public Skill toSkill(SkillRequest request) {
-        return Skill.builder()
-                .name(request.name())
-                .level(request.level())
-                .yearOrExperiences(request.yearOrExperiences())
-                .build();
-    }
-
+  public Skill toSkill(SkillRequest request) {
+    return Skill.builder()
+        .name(request.name())
+        .level(request.level())
+        .yearOrExperiences(request.yearOrExperiences())
+        .build();
+  }
 }
-

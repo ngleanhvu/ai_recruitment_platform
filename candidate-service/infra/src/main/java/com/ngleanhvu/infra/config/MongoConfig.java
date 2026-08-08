@@ -12,19 +12,19 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @RequiredArgsConstructor
 public class MongoConfig {
 
-    @Value("${candidate.mongodb.uri}")
-    private String uri;
+  @Value("${candidate.mongodb.uri}")
+  private String uri;
 
-    @Value("${candidate.mongodb.database}")
-    private String database;
+  @Value("${candidate.mongodb.database}")
+  private String database;
 
-    @Bean
-    public MongoClient mongoClient() {
-        return MongoClients.create(uri);
-    }
+  @Bean
+  public MongoClient mongoClient() {
+    return MongoClients.create(uri);
+  }
 
-    @Bean
-    public MongoTemplate mongoTemplate(MongoClient mongoClient) {
-        return new MongoTemplate(mongoClient, database);
-    }
+  @Bean
+  public MongoTemplate mongoTemplate(MongoClient mongoClient) {
+    return new MongoTemplate(mongoClient, database);
+  }
 }
