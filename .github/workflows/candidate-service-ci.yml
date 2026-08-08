@@ -4,15 +4,21 @@ on:
   push:
     branches:
       - main
-
+    paths:
+      - 'candidate-service/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'candidate-service/**'
 
 jobs:
   test:
     name: Test & Quality
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: candidate-service
 
     steps:
       - name: Checkout
@@ -24,6 +30,7 @@ jobs:
           distribution: temurin
           java-version: '23'
           cache: maven
+          cache-dependency-path: candidate-service/pom.xml
 
       - name: Make Maven wrapper executable
         run: chmod +x mvnw
@@ -36,12 +43,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: target/site/jacoco/
+          path: candidate-service/target/site/jacoco/
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: target/surefire-reports/
-
+          path: candidate-service/target/surefire-reports/

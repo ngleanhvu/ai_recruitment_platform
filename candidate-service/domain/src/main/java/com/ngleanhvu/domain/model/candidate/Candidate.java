@@ -1,7 +1,6 @@
 package com.ngleanhvu.domain.model.candidate;
 
 import com.ngleanhvu.shared.exception.DomainException;
-import com.ngleanhvu.shared.exception.ValidationException;
 import com.ngleanhvu.shared.util.ValidationUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ public final class Candidate {
 
   private final CandidateId id;
   private final String userId;
-  private final Email email;
+  private Email email;
 
   private Profile profile;
   private Address address;
@@ -102,20 +101,19 @@ public final class Candidate {
   }
 
   public void updateProfile(Profile profile) {
-    if (ValidationUtil.isNull(profile)) throw new ValidationException("Profile cannot be null");
+    if (ValidationUtil.isNull(profile)) return;
 
     this.profile = profile;
   }
 
-  public void updateAddress(Address address) {
-    this.address = address;
+  public void updateEmail(Email email) {
+    if (ValidationUtil.isNull(email)) return;
+    this.email = email;
   }
 
-  public void updateSummary(String summary) {
-    if (ValidationUtil.isEmpty(summary)) throw new ValidationException("Summary cannot be empty");
-    if (summary.length() > 1000) throw new ValidationException("Summary too long");
-
-    this.summary = summary;
+  public void addAddress(Address address) {
+    if (ValidationUtil.isNull(address)) return;
+    this.address = address;
   }
 
   public void addSkills(List<Skill> newSkills) {
@@ -124,11 +122,6 @@ public final class Candidate {
       return;
     }
     newSkills.stream().filter(skill -> !skills.contains(skill)).forEach(skills::add);
-  }
-
-  public void removeSkill(Skill skill) {
-    boolean removed = skills.remove(skill);
-    if (!removed) throw new DomainException("Skill not found");
   }
 
   public void addExperience(Experience experience) {
@@ -146,7 +139,6 @@ public final class Candidate {
 
   public void block() {
     if (status == CandidateStatus.BLOCKED) throw new DomainException("Candidate already blocked");
-
     this.status = CandidateStatus.BLOCKED;
   }
 }
