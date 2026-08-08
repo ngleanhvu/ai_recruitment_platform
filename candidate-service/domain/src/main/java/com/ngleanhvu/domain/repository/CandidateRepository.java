@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface CandidateRepository {
   void save(Candidate candidate);
+
   Optional<Candidate> findById(CandidateId candidateId);
 }
