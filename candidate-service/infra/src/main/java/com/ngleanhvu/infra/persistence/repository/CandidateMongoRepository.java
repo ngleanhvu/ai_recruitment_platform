@@ -4,5 +4,11 @@ import com.ngleanhvu.infra.persistence.documet.candidate.CandidateDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface CandidateMongoRepository extends MongoRepository<CandidateDocument, String> {}
+public interface CandidateMongoRepository extends MongoRepository<CandidateDocument, String> {
+    boolean existByEmail(String email);
+    Optional<CandidateDocument> findByEmail(String email);
+    boolean existByPhone(String phone);
+}
