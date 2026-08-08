@@ -1,6 +1,7 @@
 package com.ngleanhvu.infra.persistence.repository.impl;
 
 import com.ngleanhvu.domain.model.candidate.Candidate;
+import com.ngleanhvu.domain.model.candidate.CandidateId;
 import com.ngleanhvu.domain.repository.CandidateRepository;
 import com.ngleanhvu.infra.persistence.documet.candidate.CandidateDocument;
 import com.ngleanhvu.infra.persistence.mapper.CandidateDocumentMapper;
@@ -8,6 +9,8 @@ import com.ngleanhvu.infra.persistence.repository.CandidateMongoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,14 +21,16 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     private final CandidateDocumentMapper candidateDocumentMapper;
 
     @Override
-    public void createCandidate(Candidate candidate) {
+    public void save(Candidate candidate) {
         CandidateDocument candidateDocument = candidateDocumentMapper.toDocument(candidate);
         candidateMongoRepository.save(candidateDocument);
     }
 
     @Override
-    public Candidate getCandidateDetail(String candidateId) {
-        CandidateDocument candidateDocument = candidateMongoRepository.findById(candidateId).orElse(null);
-        return candidateDocumentMapper.toDomain(candidateDocument);
+    public Optional<Candidate> findById(CandidateId candidateId) {
+        return candidateMongoRepository
+                .findById(candidateId.value())
+                .map(candidateDocumentMapper::toDomain);
     }
+
 }

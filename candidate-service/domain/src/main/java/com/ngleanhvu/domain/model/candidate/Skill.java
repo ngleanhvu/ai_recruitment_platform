@@ -10,7 +10,6 @@ public record Skill (
         int yearOrExperiences
 ) {
     public Skill {
-        
         if (yearOrExperiences <= 0)
             throw new ValidationException("Year of experience must be > 0");
     }

@@ -1,8 +1,10 @@
 package com.ngleanhvu.application.mapper;
 
 import com.ngleanhvu.application.dto.request.CreateCandidateRequest;
+import com.ngleanhvu.application.dto.request.SkillRequest;
 import com.ngleanhvu.application.dto.response.CandidateDetailResponse;
 import com.ngleanhvu.domain.model.candidate.Candidate;
+import com.ngleanhvu.domain.model.candidate.Skill;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,4 +35,13 @@ public class CandidateMapper {
                 .build();
     }
 
+    public Skill toSkill(SkillRequest request) {
+        return Skill.builder()
+                .name(request.name())
+                .level(request.level())
+                .yearOrExperiences(request.yearOrExperiences())
+                .build();
+    }
+
 }
+

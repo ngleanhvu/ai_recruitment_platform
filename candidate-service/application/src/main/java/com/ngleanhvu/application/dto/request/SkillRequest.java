@@ -1,4 +1,9 @@
 package com.ngleanhvu.application.dto.request;
 
-public class SkillRequest {
+public record SkillRequest(
+        String name,
+        String level,
+        int yearOrExperiences
+) {
+
 }

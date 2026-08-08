@@ -82,10 +82,10 @@ public final class Candidate {
                 null,
                 CandidateStatus.PENDING,
                 summary,
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>()
+                null,
+                null,
+                null,
+                null
         );
     }
 
@@ -139,18 +139,12 @@ public final class Candidate {
 
     public void addSkills(List<Skill> newSkills) {
 
-        if (ValidationUtil.isEmpty(newSkills))
-            throw new ValidationException("Skills cannot be empty");
-
-        for (Skill skill : newSkills) {
-            if (skills.contains(skill)) {
-                throw new DomainException(
-                        "Skill already exists: " + skill.name()
-                );
-            }
+        if (ValidationUtil.isEmpty(newSkills)) {
+            return;
         }
-
-        skills.addAll(newSkills);
+        newSkills.stream()
+                .filter(skill -> !skills.contains(skill))
+                .forEach(skills::add);
     }
 
     public void removeSkill(Skill skill) {
