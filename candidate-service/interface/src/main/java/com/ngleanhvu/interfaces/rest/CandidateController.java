@@ -100,7 +100,8 @@ public record CandidateController(
 
   @PostMapping("/{candidateId}/upload-avatar")
   public ApiResponse<Void> uploadAvatar(
-      @PathVariable String candidateId, @RequestPart("avatar") MultipartFile avatar) {
+      @PathVariable("candidateId") String candidateId,
+      @RequestPart("avatar") MultipartFile avatar) {
     updateCandidateAvatarUseCase.execute(new CandidateId(candidateId), avatar);
 
     return ApiResponse.success("Upload avatar success", null);
