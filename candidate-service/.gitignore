@@ -9,4 +9,9 @@
 
 # Build
 target/
+./application/target
+./domain/target
+./infra/target
+./start/target
+./interface/target
 .mvn

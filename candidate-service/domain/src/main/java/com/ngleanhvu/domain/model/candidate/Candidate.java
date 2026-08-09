@@ -12,17 +12,17 @@ public final class Candidate {
 
   private final CandidateId id;
   private final String userId;
-  private final Email email;
+  private Email email;
 
   private Profile profile;
   private Address address;
   private CandidateStatus status;
-  private String summary;
+  private final String summary;
 
-  private final List<Skill> skills;
-  private final List<Experience> experiences;
-  private final List<Education> educations;
-  private final List<SocialLink> socialLinks;
+  private List<Skill> skills;
+  private List<Experience> experiences;
+  private List<Education> educations;
+  private List<SocialLink> socialLinks;
 
   private Candidate(
       CandidateId id,
@@ -102,39 +102,44 @@ public final class Candidate {
   }
 
   public void updateProfile(Profile profile) {
-    if (ValidationUtil.isNull(profile)) throw new ValidationException("Profile cannot be null");
+    if (ValidationUtil.isNull(profile)) return;
 
     this.profile = profile;
   }
 
+  public void updateEmail(Email email) {
+    if (ValidationUtil.isNull(email)) return;
+    this.email = email;
+  }
+
   public void updateAddress(Address address) {
+    if (ValidationUtil.isNull(address)) return;
     this.address = address;
   }
 
-  public void updateSummary(String summary) {
-    if (ValidationUtil.isEmpty(summary)) throw new ValidationException("Summary cannot be empty");
-    if (summary.length() > 1000) throw new ValidationException("Summary too long");
-
-    this.summary = summary;
-  }
-
-  public void addSkills(List<Skill> newSkills) {
+  public void updateSkills(List<Skill> newSkills) {
 
     if (ValidationUtil.isEmpty(newSkills)) {
       return;
     }
-    newSkills.stream().filter(skill -> !skills.contains(skill)).forEach(skills::add);
+
+    this.skills = newSkills;
   }
 
-  public void removeSkill(Skill skill) {
-    boolean removed = skills.remove(skill);
-    if (!removed) throw new DomainException("Skill not found");
+  public void updateExperiences(List<Experience> newExperiences) {
+    if (ValidationUtil.isNull(newExperiences)) return;
+
+    this.experiences = newExperiences;
   }
 
-  public void addExperience(Experience experience) {
-    if (ValidationUtil.isNull(experience)) throw new DomainException("Experience required");
+  public void updateEducations(List<Education> newEducations) {
+    if (ValidationUtil.isNull(newEducations)) return;
+    this.educations = newEducations;
+  }
 
-    experiences.add(experience);
+  public void updateSocialLinks(List<SocialLink> newSocialLinks) {
+    if (ValidationUtil.isNull(newSocialLinks)) return;
+    this.socialLinks = newSocialLinks;
   }
 
   public void activate() {
@@ -146,7 +151,14 @@ public final class Candidate {
 
   public void block() {
     if (status == CandidateStatus.BLOCKED) throw new DomainException("Candidate already blocked");
-
     this.status = CandidateStatus.BLOCKED;
+  }
+
+  public void updateAvatar(String avatarKey) {
+    if (ValidationUtil.isEmpty(avatarKey)) {
+      throw new ValidationException("Avatar key is required");
+    }
+
+    this.profile = new Profile(profile.firstName(), profile.lastName(), profile.phone(), avatarKey);
   }
 }
