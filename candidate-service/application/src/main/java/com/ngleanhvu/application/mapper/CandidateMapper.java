@@ -6,7 +6,7 @@ import com.ngleanhvu.domain.model.candidate.*;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CandidateMapper {
+public final class CandidateMapper {
   public Candidate toDomain(CreateCandidateRequest request) {
     return Candidate.create(
         "",

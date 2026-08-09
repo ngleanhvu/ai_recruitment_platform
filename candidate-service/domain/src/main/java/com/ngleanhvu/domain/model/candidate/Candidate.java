@@ -1,6 +1,7 @@
 package com.ngleanhvu.domain.model.candidate;
 
 import com.ngleanhvu.shared.exception.DomainException;
+import com.ngleanhvu.shared.exception.ValidationException;
 import com.ngleanhvu.shared.util.ValidationUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,5 +152,13 @@ public final class Candidate {
   public void block() {
     if (status == CandidateStatus.BLOCKED) throw new DomainException("Candidate already blocked");
     this.status = CandidateStatus.BLOCKED;
+  }
+
+  public void updateAvatar(String avatarKey) {
+    if (ValidationUtil.isEmpty(avatarKey)) {
+      throw new ValidationException("Avatar key is required");
+    }
+
+    this.profile = new Profile(profile.firstName(), profile.lastName(), profile.phone(), avatarKey);
   }
 }

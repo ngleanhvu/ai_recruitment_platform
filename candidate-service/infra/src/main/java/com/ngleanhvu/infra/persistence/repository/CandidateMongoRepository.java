@@ -12,7 +12,7 @@ public interface CandidateMongoRepository extends MongoRepository<CandidateDocum
   boolean existsByEmail(String email);
 
   Optional<CandidateDocument> findByEmail(String email);
-  
+
   @Query(value = "{ 'profile.phone': ?0 }", exists = true)
   boolean existsByPhone(String phone);
 }
