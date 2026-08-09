@@ -16,12 +16,12 @@ public final class Candidate {
   private Profile profile;
   private Address address;
   private CandidateStatus status;
-  private String summary;
+  private final String summary;
 
-  private final List<Skill> skills;
-  private final List<Experience> experiences;
-  private final List<Education> educations;
-  private final List<SocialLink> socialLinks;
+  private List<Skill> skills;
+  private List<Experience> experiences;
+  private List<Education> educations;
+  private List<SocialLink> socialLinks;
 
   private Candidate(
       CandidateId id,
@@ -111,23 +111,34 @@ public final class Candidate {
     this.email = email;
   }
 
-  public void addAddress(Address address) {
+  public void updateAddress(Address address) {
     if (ValidationUtil.isNull(address)) return;
     this.address = address;
   }
 
-  public void addSkills(List<Skill> newSkills) {
+  public void updateSkills(List<Skill> newSkills) {
 
     if (ValidationUtil.isEmpty(newSkills)) {
       return;
     }
-    newSkills.stream().filter(skill -> !skills.contains(skill)).forEach(skills::add);
+
+    this.skills = newSkills;
   }
 
-  public void addExperience(Experience experience) {
-    if (ValidationUtil.isNull(experience)) throw new DomainException("Experience required");
+  public void updateExperiences(List<Experience> newExperiences) {
+    if (ValidationUtil.isNull(newExperiences)) return;
 
-    experiences.add(experience);
+    this.experiences = newExperiences;
+  }
+
+  public void updateEducations(List<Education> newEducations) {
+    if (ValidationUtil.isNull(newEducations)) return;
+    this.educations = newEducations;
+  }
+
+  public void updateSocialLinks(List<SocialLink> newSocialLinks) {
+    if (ValidationUtil.isNull(newSocialLinks)) return;
+    this.socialLinks = newSocialLinks;
   }
 
   public void activate() {

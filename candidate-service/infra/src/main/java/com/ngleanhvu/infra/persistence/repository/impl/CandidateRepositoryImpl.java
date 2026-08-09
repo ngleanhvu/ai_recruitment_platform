@@ -35,7 +35,7 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
   @Override
   public boolean existByEmail(Email email) {
-    return candidateMongoRepository.existByEmail(email.value());
+    return candidateMongoRepository.existsByEmail(email.value());
   }
 
   @Override
@@ -47,6 +47,6 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
   @Override
   public boolean existByPhone(String phone) {
-    return candidateMongoRepository.existByPhone(phone);
+    return candidateMongoRepository.existsByPhone(phone);
   }
 }

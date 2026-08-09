@@ -13,7 +13,7 @@ import com.ngleanhvu.shared.util.ValidationUtil;
 import org.springframework.stereotype.Service;
 
 @Service
-public record UpdateProfileUseCase(
+public record UpdateCandidateProfileUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
   public void execute(CandidateId candidateId, UpdateProfileRequest request) {
     Profile profile = candidateMapper.toProfile(request);

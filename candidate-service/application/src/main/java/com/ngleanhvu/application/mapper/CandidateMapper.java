@@ -1,14 +1,8 @@
 package com.ngleanhvu.application.mapper;
 
-import com.ngleanhvu.application.dto.request.AddressRequest;
-import com.ngleanhvu.application.dto.request.CreateCandidateRequest;
-import com.ngleanhvu.application.dto.request.SkillRequest;
-import com.ngleanhvu.application.dto.request.UpdateProfileRequest;
+import com.ngleanhvu.application.dto.request.*;
 import com.ngleanhvu.application.dto.response.CandidateDetailResponse;
-import com.ngleanhvu.domain.model.candidate.Address;
-import com.ngleanhvu.domain.model.candidate.Candidate;
-import com.ngleanhvu.domain.model.candidate.Profile;
-import com.ngleanhvu.domain.model.candidate.Skill;
+import com.ngleanhvu.domain.model.candidate.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -38,7 +32,7 @@ public class CandidateMapper {
         .build();
   }
 
-  public Skill toSkill(SkillRequest request) {
+  public Skill toSkill(UpdateSkillRequest request) {
     return Skill.builder()
         .name(request.name())
         .level(request.level())
@@ -61,5 +55,31 @@ public class CandidateMapper {
         .country(request.country())
         .district(request.district())
         .build();
+  }
+
+  public Experience toExperience(UpdateExperiencesRequest request) {
+    return Experience.builder()
+        .company(request.company())
+        .isCurrent(request.isCurrent())
+        .startDate(request.startDate())
+        .endDate(request.endDate())
+        .description(request.description())
+        .position(request.position())
+        .build();
+  }
+
+  public Education toEducation(UpdateEducationRequest request) {
+    return Education.builder()
+        .gpa(request.gpa())
+        .major(request.major())
+        .degree(request.degree())
+        .school(request.school())
+        .startYear(request.startYear())
+        .endYear(request.endYear())
+        .build();
+  }
+
+  public SocialLink toSocialLink(UpdateSocialLinkRequest request) {
+    return SocialLink.builder().type(request.type()).url(request.url()).build();
   }
 }

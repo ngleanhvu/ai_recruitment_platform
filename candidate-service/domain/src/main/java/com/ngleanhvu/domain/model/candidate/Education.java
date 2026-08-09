@@ -1,6 +1,7 @@
 package com.ngleanhvu.domain.model.candidate;
 
 import com.ngleanhvu.shared.exception.ValidationException;
+import com.ngleanhvu.shared.util.ValidationUtil;
 import lombok.Builder;
 
 @Builder
@@ -9,5 +10,6 @@ public record Education(
   public Education {
     if (gpa < 0.0 || gpa > 4.0) throw new ValidationException("Gpa must be  >= 0 and <= 4");
     if (startYear > endYear) throw new ValidationException("Start year must be before end year");
+    if (ValidationUtil.isEmpty(school)) throw new ValidationException("School must not be empty");
   }
 }
