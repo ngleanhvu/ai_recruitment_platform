@@ -6,16 +6,20 @@ on:
       - main
     paths:
       - 'candidate-service/**'
+      - '.github/workflows/candidate-service-ci.yml'
+
   pull_request:
     branches:
       - main
     paths:
       - 'candidate-service/**'
+      - '.github/workflows/candidate-service-ci.yml'
 
 jobs:
   test:
     name: Test & Quality
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: candidate-service
@@ -32,11 +36,11 @@ jobs:
           cache: maven
           cache-dependency-path: candidate-service/pom.xml
 
-      - name: Make Maven wrapper executable
-        run: chmod +x mvnw
+      - name: Check formatting
+        run: mvn spotless:check
 
-      - name: Run tests, JaCoCo and Spotless
-        run: ./mvnw clean verify
+      - name: Run tests
+        run: mvn clean verify
 
       - name: Upload JaCoCo report
         if: always()
@@ -44,6 +48,7 @@ jobs:
         with:
           name: jacoco-report
           path: candidate-service/target/site/jacoco/
+          if-no-files-found: warn
 
       - name: Upload test reports
         if: always()
@@ -51,3 +56,4 @@ jobs:
         with:
           name: test-reports
           path: candidate-service/target/surefire-reports/
+          if-no-files-found: warn
