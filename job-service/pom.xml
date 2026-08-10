@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ngleanhvu</groupId>
-    <artifactId>candidate-service</artifactId>
+    <artifactId>job-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>candidate-service-application</module>
-        <module>candidate-service-infra</module>
-        <module>candidate-service-domain</module>
-        <module>candidate-service-interface</module>
-        <module>candidate-service-start</module>
+        <module>job-service-start</module>
+        <module>job-service-interface</module>
+        <module>job-service-application</module>
+        <module>job-service-domain</module>
+        <module>job-service-infra</module>
     </modules>
 
     <properties>

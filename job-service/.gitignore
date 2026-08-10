@@ -1,0 +1,11 @@
+# Logs
+*.log
+
+# Build
+target/
+job-service-application/target
+job-service-domain/target
+job-service-infra/target
+job-service-start/target
+job-service-interface/target
+.mvn
