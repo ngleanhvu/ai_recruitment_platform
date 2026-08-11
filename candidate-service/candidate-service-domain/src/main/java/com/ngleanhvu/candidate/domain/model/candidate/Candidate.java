@@ -1,5 +1,7 @@
 package com.ngleanhvu.candidate.domain.model.candidate;
 
+import com.ngleanhvu.candidate.domain.model.candidate.enums.CandidateStatus;
+import com.ngleanhvu.shared.exception.BusinessException;
 import com.ngleanhvu.shared.exception.DomainException;
 import com.ngleanhvu.shared.exception.ValidationException;
 import com.ngleanhvu.shared.util.ValidationUtil;
@@ -44,13 +46,13 @@ public final class Candidate {
     this.status = status;
     this.summary = summary;
 
-    this.skills = skills != null ? new ArrayList<>(skills) : new ArrayList<>();
+    this.skills = ValidationUtil.isNotNull(skills) ? new ArrayList<>(skills) : new ArrayList<>();
 
-    this.experiences = experiences != null ? new ArrayList<>(experiences) : new ArrayList<>();
+    this.experiences = ValidationUtil.isNotNull(experiences) ? new ArrayList<>(experiences) : new ArrayList<>();
 
-    this.educations = educations != null ? new ArrayList<>(educations) : new ArrayList<>();
+    this.educations = ValidationUtil.isNotNull(educations) ? new ArrayList<>(educations) : new ArrayList<>();
 
-    this.socialLinks = socialLinks != null ? new ArrayList<>(socialLinks) : new ArrayList<>();
+    this.socialLinks = ValidationUtil.isNotNull(socialLinks) ? new ArrayList<>(socialLinks) : new ArrayList<>();
   }
 
   public static Candidate create(
@@ -144,13 +146,13 @@ public final class Candidate {
 
   public void activate() {
     if (status == CandidateStatus.BLOCKED)
-      throw new DomainException("Blocked candidate cannot activate");
+      throw new BusinessException("Blocked candidate cannot activate");
 
     this.status = CandidateStatus.ACTIVE;
   }
 
   public void block() {
-    if (status == CandidateStatus.BLOCKED) throw new DomainException("Candidate already blocked");
+    if (status == CandidateStatus.BLOCKED) throw new BusinessException("Candidate already blocked");
     this.status = CandidateStatus.BLOCKED;
   }
 
