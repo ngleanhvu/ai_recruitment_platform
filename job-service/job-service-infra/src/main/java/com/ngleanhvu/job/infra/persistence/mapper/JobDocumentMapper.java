@@ -13,28 +13,39 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public final class JobDocumentMapper {
+public class JobDocumentMapper {
     public JobDocument toDocument(Job job) {
-        if (ValidationUtil.isNull(job))
+        if (ValidationUtil.isNull(job)) {
             return null;
+        }
         JobDocument jobDocument = new JobDocument();
         jobDocument.setId(job.getJobId().value());
         jobDocument.setTitle(job.getTitle());
         jobDocument.setDescription(job.getDescription());
         jobDocument.setRecruiterId(job.getRecruiterId());
-
-        List<String> benefits = job.getBenefits().stream()
-                .map(Benefit::name)
-                .toList();
-        jobDocument.setBenefits(benefits);
-
         jobDocument.setWorkplace(job.getWorkplace());
-        jobDocument.setRequirements(job.getRequirements());
-        jobDocument.setSalary(job.getSalary());
-        jobDocument.setStatus(job.getStatus().name());
-        jobDocument.setPublishedAt(job.getPublishedAt());
-        jobDocument.setApplicationDeadline(job.getDeadline().value());
         jobDocument.setEmploymentType(job.getEmploymentType().name());
+
+        if (!ValidationUtil.isNull(job.getBenefits())) {
+            List<String> benefits = job.getBenefits().stream()
+                    .map(Benefit::name)
+                    .toList();
+            jobDocument.setBenefits(benefits);
+        }
+
+        if (!ValidationUtil.isNull(job.getRequirements()))
+            jobDocument.setRequirements(job.getRequirements());
+
+        if (!ValidationUtil.isNull(job.getSalary()))
+            jobDocument.setSalary(job.getSalary());
+
+        jobDocument.setStatus(job.getStatus().name());
+
+        if (!ValidationUtil.isNull(job.getPublishedAt()))
+            jobDocument.setPublishedAt(job.getPublishedAt());
+
+        if (!ValidationUtil.isNull(job.getDeadline()))
+            jobDocument.setApplicationDeadline(job.getDeadline().value());
 
         return jobDocument;
     }
