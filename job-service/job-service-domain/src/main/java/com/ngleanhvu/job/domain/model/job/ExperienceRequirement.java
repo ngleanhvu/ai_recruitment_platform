@@ -1,11 +1,12 @@
 package com.ngleanhvu.job.domain.model.job;
 
 import com.ngleanhvu.shared.exception.ValidationException;
+import com.ngleanhvu.shared.util.ValidationUtil;
 
-public record ExperienceRequirement(int minimumYears, int maximumYears) {
+public record ExperienceRequirement(Integer minimumYears, Integer maximumYears) {
   public ExperienceRequirement {
     if (minimumYears < 0) throw new ValidationException("Minimum experience cannot be negative");
-    if (maximumYears < minimumYears)
+    if (!ValidationUtil.isNull(maximumYears) && maximumYears < minimumYears)
       throw new ValidationException("Maximum experience must be greater than minimum");
   }
 }

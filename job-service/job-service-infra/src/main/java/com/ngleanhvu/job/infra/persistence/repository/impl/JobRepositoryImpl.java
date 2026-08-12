@@ -1,6 +1,7 @@
 package com.ngleanhvu.job.infra.persistence.repository.impl;
 
 import com.ngleanhvu.job.domain.model.job.Job;
+import com.ngleanhvu.job.domain.model.job.JobId;
 import com.ngleanhvu.job.domain.repository.JobRepository;
 import com.ngleanhvu.job.infra.persistence.document.job.JobDocument;
 import com.ngleanhvu.job.infra.persistence.mapper.JobDocumentMapper;
@@ -26,7 +27,7 @@ public final class JobRepositoryImpl implements JobRepository {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Job> findById(String id) {
-        return Optional.empty();
+    public Optional<Job> findById(JobId id) {
+        return jobMongoRepository.findById(id.value()).map(jobDocumentMapper::toDomain);
     }
 }

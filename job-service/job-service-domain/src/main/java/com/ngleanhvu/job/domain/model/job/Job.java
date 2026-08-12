@@ -37,7 +37,7 @@ public final class Job {
     this.workplace = workplace;
     this.salary = salary;
     this.requirements = requirements;
-    this.benefits = ValidationUtil.isNotNull(benefits) ? new ArrayList<>(benefits) : null;
+    this.benefits = ValidationUtil.isNotNull(benefits) ? new ArrayList<>(benefits) : new ArrayList<>();
     this.status = status;
     this.deadline = deadline;
     this.publishedAt = publishedAt;
