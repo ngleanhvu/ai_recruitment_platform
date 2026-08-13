@@ -1,6 +1,6 @@
 package com.ngleanhvu.candidate.application.usecase.candidate;
 
-import com.ngleanhvu.candidate.application.dto.request.UpdateSkillRequest;
+import com.ngleanhvu.candidate.application.dto.request.SkillRequest;
 import com.ngleanhvu.candidate.application.mapper.CandidateMapper;
 import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public record UpdateCandidateSkillUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
 
-  public void execute(CandidateId candidateId, List<UpdateSkillRequest> request) {
+  public void execute(CandidateId candidateId, List<SkillRequest> request) {
     Candidate candidate =
         candidateRepository
             .findById(candidateId)

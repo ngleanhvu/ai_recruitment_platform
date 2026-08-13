@@ -1,6 +1,6 @@
 package com.ngleanhvu.candidate.application.usecase.candidate;
 
-import com.ngleanhvu.candidate.application.dto.request.UpdateProfileRequest;
+import com.ngleanhvu.candidate.application.dto.request.ProfileRequest;
 import com.ngleanhvu.candidate.application.mapper.CandidateMapper;
 import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public record UpdateCandidateProfileUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
-  public void execute(CandidateId candidateId, UpdateProfileRequest request) {
+  public void execute(CandidateId candidateId, ProfileRequest request) {
     Profile profile = candidateMapper.toProfile(request);
     Email email = new Email(request.email());
 

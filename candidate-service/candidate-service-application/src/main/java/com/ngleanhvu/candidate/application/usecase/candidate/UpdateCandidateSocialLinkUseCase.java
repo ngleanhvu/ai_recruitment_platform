@@ -1,6 +1,6 @@
 package com.ngleanhvu.candidate.application.usecase.candidate;
 
-import com.ngleanhvu.candidate.application.dto.request.UpdateSocialLinkRequest;
+import com.ngleanhvu.candidate.application.dto.request.SocialLinkRequest;
 import com.ngleanhvu.candidate.application.mapper.CandidateMapper;
 import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public record UpdateCandidateSocialLinkUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
-  public void execute(CandidateId candidateId, List<UpdateSocialLinkRequest> request) {
+  public void execute(CandidateId candidateId, List<SocialLinkRequest> request) {
     Candidate candidate =
         candidateRepository
             .findById(candidateId)

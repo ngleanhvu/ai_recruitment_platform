@@ -32,7 +32,7 @@ public final class CandidateMapper {
         .build();
   }
 
-  public Skill toSkill(UpdateSkillRequest request) {
+  public Skill toSkill(SkillRequest request) {
     return Skill.builder()
         .name(request.name())
         .level(request.level())
@@ -40,7 +40,7 @@ public final class CandidateMapper {
         .build();
   }
 
-  public Profile toProfile(UpdateProfileRequest request) {
+  public Profile toProfile(ProfileRequest request) {
     return Profile.builder()
         .phone(request.phone())
         .firstName(request.firstName())
@@ -57,7 +57,7 @@ public final class CandidateMapper {
         .build();
   }
 
-  public Experience toExperience(UpdateExperiencesRequest request) {
+  public Experience toExperience(ExperiencesRequest request) {
     return Experience.builder()
         .company(request.company())
         .isCurrent(request.isCurrent())
@@ -68,7 +68,7 @@ public final class CandidateMapper {
         .build();
   }
 
-  public Education toEducation(UpdateEducationRequest request) {
+  public Education toEducation(EducationRequest request) {
     return Education.builder()
         .gpa(request.gpa())
         .major(request.major())
@@ -79,7 +79,7 @@ public final class CandidateMapper {
         .build();
   }
 
-  public SocialLink toSocialLink(UpdateSocialLinkRequest request) {
+  public SocialLink toSocialLink(SocialLinkRequest request) {
     return SocialLink.builder().type(request.type()).url(request.url()).build();
   }
 }

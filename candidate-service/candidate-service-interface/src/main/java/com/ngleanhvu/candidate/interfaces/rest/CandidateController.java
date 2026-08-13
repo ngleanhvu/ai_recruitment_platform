@@ -42,7 +42,7 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-skills")
   public ApiResponse<Void> updateSkills(
-      @RequestBody List<UpdateSkillRequest> skills,
+      @RequestBody List<SkillRequest> skills,
       @PathVariable("candidateId") String candidateId) {
     updateCandidateSkillUseCase.execute(new CandidateId(candidateId), skills);
     return ApiResponse.success("Update skill for candidate success", null);
@@ -50,7 +50,7 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-profile")
   public ApiResponse<Void> updateProfile(
-          @RequestBody UpdateProfileRequest request, @PathVariable("candidateId") String candidateId) {
+          @RequestBody ProfileRequest request, @PathVariable("candidateId") String candidateId) {
     updateProfileUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update profile success", null);
   }
@@ -64,7 +64,7 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-educations")
   public ApiResponse<Void> updateEducations(
-      @RequestBody List<UpdateEducationRequest> request,
+      @RequestBody List<EducationRequest> request,
       @PathVariable("candidateId") String candidateId) {
     updateCandidateEducationUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update education success", null);
@@ -72,7 +72,7 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-social-link")
   public ApiResponse<Void> updateSocialLinks(
-      @RequestBody List<UpdateSocialLinkRequest> request,
+      @RequestBody List<SocialLinkRequest> request,
       @PathVariable("candidateId") String candidateId) {
     updateCandidateSocialLinkUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update social link success", null);
@@ -80,7 +80,7 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-experiences")
   public ApiResponse<Void> updateExperiences(
-      @RequestBody List<UpdateExperiencesRequest> request,
+      @RequestBody List<ExperiencesRequest> request,
       @PathVariable("candidateId") String candidateId) {
     updateCandidateExperiencesUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update experience success", null);
