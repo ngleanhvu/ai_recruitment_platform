@@ -1,0 +1,20 @@
+package com.ngleanhvu.candidate.infra.persistence.repository;
+
+
+import java.util.Optional;
+
+import com.ngleanhvu.candidate.infra.persistence.documet.candidate.CandidateDocument;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CandidateMongoRepository extends MongoRepository<CandidateDocument, String> {
+
+  boolean existsByEmail(String email);
+
+  Optional<CandidateDocument> findByEmail(String email);
+
+  @Query(value = "{ 'profile.phone': ?0 }", exists = true)
+  boolean existsByPhone(String phone);
+}

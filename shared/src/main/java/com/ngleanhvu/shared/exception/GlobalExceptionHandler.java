@@ -57,6 +57,23 @@ public class GlobalExceptionHandler {
                 );
     }
 
+    @ExceptionHandler(ResourceAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleResourceAlreadyExist(
+            ResourceAlreadyExistException ex,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(
+                        ErrorResponse.of(
+                                500,
+                                ex.getMessage(),
+                                request.getRequestURI()
+                        )
+                );
+    }
+
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnknown(
             Exception ex,
@@ -68,6 +85,22 @@ public class GlobalExceptionHandler {
                         ErrorResponse.of(
                                 500,
                                 "Internal server error",
+                                request.getRequestURI()
+                        )
+                );
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleBusiness(
+            BusinessException ex,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(
+                        ErrorResponse.of(
+                                500,
+                                ex.getMessage(),
                                 request.getRequestURI()
                         )
                 );

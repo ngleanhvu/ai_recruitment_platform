@@ -9,9 +9,9 @@
 
 # Build
 target/
-./application/target
-./domain/target
-./infra/target
-./start/target
-./interface/target
+candidate-service-application/target
+candidate-service-domain/target
+candidate-service-infra/target
+candidate-service-start/target
+candidate-service-interface/target
 .mvn

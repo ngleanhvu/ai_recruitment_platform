@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>application</module>
-        <module>infra</module>
-        <module>domain</module>
-        <module>interface</module>
-        <module>start</module>
+        <module>candidate-service-application</module>
+        <module>candidate-service-infra</module>
+        <module>candidate-service-domain</module>
+        <module>candidate-service-interface</module>
+        <module>candidate-service-start</module>
     </modules>
 
     <properties>
@@ -46,11 +46,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
-            <version>8.5.3</version>
         </dependency>
     </dependencies>
 
