@@ -8,17 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
       </profile>
-      <profile name="Annotation profile for shared" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-        </processorPath>
-        <module name="shared" />
-      </profile>
-      <profile name="Annotation profile for candidate-service" enabled="true">
+      <profile name="Annotation profile for application-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -26,13 +16,19 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="candidate-service-start" />
+        <module name="application-service-application" />
+        <module name="shared" />
+        <module name="application-service-interface" />
         <module name="job-service-domain" />
         <module name="job-service-interface" />
+        <module name="application-service-infra" />
+        <module name="application-service-domain" />
+        <module name="application-service-start" />
         <module name="candidate-service-application" />
         <module name="candidate-service-interface" />
         <module name="job-service-application" />
-        <module name="job-service-infra" />
         <module name="candidate-service-domain" />
+        <module name="job-service-infra" />
         <module name="job-service-start" />
         <module name="candidate-service-infra" />
       </profile>

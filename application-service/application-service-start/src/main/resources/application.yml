@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: application-service
+
+  profiles:
+    active: ${APPLICATION_ACTIVE_PROFILE}
