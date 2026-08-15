@@ -1,4 +1,4 @@
-package com.ngleanhvu.shared.constant;
+package com.ngleanhvu.common.constant;
 
 public class BucketConstant {
     public static final String CANDIDATES_SOURCE = "candidates";

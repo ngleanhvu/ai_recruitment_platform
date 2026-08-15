@@ -1,2 +1,3 @@
-target
-.mvn
+common/target
+contracts/target
+target/
