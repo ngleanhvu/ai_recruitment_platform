@@ -1,7 +1,7 @@
 package com.ngleanhvu.application.infra.persistence.document.application;
 
 import com.ngleanhvu.domain.model.application.MatchingResult;
-import com.ngleanhvu.shared.entity.BaseEntity;
+import com.ngleanhvu.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

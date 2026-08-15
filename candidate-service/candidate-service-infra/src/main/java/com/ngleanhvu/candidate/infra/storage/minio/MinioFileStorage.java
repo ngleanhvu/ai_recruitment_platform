@@ -3,7 +3,7 @@ package com.ngleanhvu.candidate.infra.storage.minio;
 
 import com.ngleanhvu.candidate.infra.config.MinioProperties;
 import com.ngleanhvu.candidate.infra.exception.MinioStorageException;
-import com.ngleanhvu.shared.storage.FileStorage;
+import com.ngleanhvu.common.storage.FileStorage;
 import io.minio.*;
 import io.minio.http.Method;
 import java.io.InputStream;

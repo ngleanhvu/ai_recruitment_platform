@@ -1,7 +1,7 @@
 package com.ngleanhvu.job.domain.model.job.enums;
 
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 
 public enum EducationLevel {
   HIGH_SCHOOL,

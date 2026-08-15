@@ -1,7 +1,7 @@
 package com.ngleanhvu.domain.model.application.enums;
 
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 
 public enum ApplicationStatus {
     SUBMITTED,

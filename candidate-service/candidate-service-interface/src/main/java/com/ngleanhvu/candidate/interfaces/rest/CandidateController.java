@@ -4,7 +4,7 @@ import com.ngleanhvu.candidate.application.dto.request.*;
 import com.ngleanhvu.candidate.application.dto.response.CandidateDetailResponse;
 import com.ngleanhvu.candidate.application.usecase.candidate.*;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
-import com.ngleanhvu.shared.response.ApiResponse;
+import com.ngleanhvu.common.response.ApiResponse;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +35,7 @@ public record CandidateController(
   @GetMapping("/{candidateId}/get-detail")
   public ApiResponse<CandidateDetailResponse> getCandidateDetail(
       @PathVariable("candidateId") String candidateId) {
-    CandidateDetailResponse candidateDetailResponse =
-        getCandidateDetailUseCase.execute(new CandidateId(candidateId));
+    CandidateDetailResponse candidateDetailResponse = getCandidateDetailUseCase.execute(new CandidateId(candidateId));
     return ApiResponse.success("Get candidate detail success", candidateDetailResponse);
   }
 
@@ -50,14 +49,14 @@ public record CandidateController(
 
   @PutMapping("/{candidateId}/update-profile")
   public ApiResponse<Void> updateProfile(
-          @RequestBody ProfileRequest request, @PathVariable("candidateId") String candidateId) {
+      @RequestBody ProfileRequest request, @PathVariable("candidateId") String candidateId) {
     updateProfileUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update profile success", null);
   }
 
   @PutMapping("/{candidateId}/update-address")
   public ApiResponse<Void> updateAddress(
-          @RequestBody AddressRequest request, @PathVariable("candidateId") String candidateId) {
+      @RequestBody AddressRequest request, @PathVariable("candidateId") String candidateId) {
     updateAddressUseCase.execute(new CandidateId(candidateId), request);
     return ApiResponse.success("Update address success", null);
   }

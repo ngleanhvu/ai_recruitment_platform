@@ -1,8 +1,8 @@
 package com.ngleanhvu.candidate.domain.model.candidate.enums;
 
-import com.ngleanhvu.shared.exception.DomainException;
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+
+import com.ngleanhvu.common.util.ValidationUtil;
+import jakarta.validation.ValidationException;
 
 public enum CandidateStatus {
   ACTIVE,

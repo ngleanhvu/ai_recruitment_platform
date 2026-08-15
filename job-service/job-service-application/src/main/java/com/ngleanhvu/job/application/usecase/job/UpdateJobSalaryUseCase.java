@@ -6,14 +6,13 @@ import com.ngleanhvu.job.domain.model.job.Job;
 import com.ngleanhvu.job.domain.model.job.JobId;
 import com.ngleanhvu.job.domain.model.job.SalaryRange;
 import com.ngleanhvu.job.domain.repository.JobRepository;
-import com.ngleanhvu.shared.exception.ResourceNotFoundException;
+import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public record UpdateJobSalaryUseCase (
+public record UpdateJobSalaryUseCase(
         JobRepository jobRepository,
-        JobMapper jobMapper
-) {
+        JobMapper jobMapper) {
     public void execute(SalaryRangeRequest request, JobId jobId) {
         Job job = jobRepository.findById(jobId)
                 .orElseThrow(() -> new ResourceNotFoundException("Job not found"));

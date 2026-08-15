@@ -3,7 +3,7 @@ package com.ngleanhvu.job.application.mapper;
 import com.ngleanhvu.job.application.dto.request.*;
 import com.ngleanhvu.job.domain.model.job.*;
 import com.ngleanhvu.job.domain.model.job.enums.*;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.util.ValidationUtil;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -22,8 +22,7 @@ public final class JobMapper {
                 request.title(),
                 request.description(),
                 EmploymentType.from(request.employmentType()),
-                workPlace
-        );
+                workPlace);
     }
 
     public WorkPlace toWorkPlace(WorkPlaceRequest request) {
@@ -42,8 +41,7 @@ public final class JobMapper {
         return new SalaryRange(
                 new BigDecimal(request.min()),
                 new BigDecimal(request.max()),
-                Currency.from(request.currency())
-        );
+                Currency.from(request.currency()));
     }
 
     public JobRequirements toJobRequirements(JobRequirementRequest request) {
