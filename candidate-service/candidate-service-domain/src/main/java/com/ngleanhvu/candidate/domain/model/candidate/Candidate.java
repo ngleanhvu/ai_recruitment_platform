@@ -1,12 +1,11 @@
 package com.ngleanhvu.candidate.domain.model.candidate;
 
 import com.ngleanhvu.candidate.domain.model.candidate.enums.CandidateStatus;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ngleanhvu.common.exception.BusinessException;
 import com.ngleanhvu.common.exception.ValidationException;
 import com.ngleanhvu.common.util.ValidationUtil;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 
 @Getter
@@ -48,11 +47,14 @@ public final class Candidate {
 
     this.skills = ValidationUtil.isNotNull(skills) ? new ArrayList<>(skills) : new ArrayList<>();
 
-    this.experiences = ValidationUtil.isNotNull(experiences) ? new ArrayList<>(experiences) : new ArrayList<>();
+    this.experiences =
+        ValidationUtil.isNotNull(experiences) ? new ArrayList<>(experiences) : new ArrayList<>();
 
-    this.educations = ValidationUtil.isNotNull(educations) ? new ArrayList<>(educations) : new ArrayList<>();
+    this.educations =
+        ValidationUtil.isNotNull(educations) ? new ArrayList<>(educations) : new ArrayList<>();
 
-    this.socialLinks = ValidationUtil.isNotNull(socialLinks) ? new ArrayList<>(socialLinks) : new ArrayList<>();
+    this.socialLinks =
+        ValidationUtil.isNotNull(socialLinks) ? new ArrayList<>(socialLinks) : new ArrayList<>();
   }
 
   public static Candidate create(

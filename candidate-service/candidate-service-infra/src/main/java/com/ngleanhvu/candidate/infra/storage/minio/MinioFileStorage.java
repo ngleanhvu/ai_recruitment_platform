@@ -1,6 +1,5 @@
 package com.ngleanhvu.candidate.infra.storage.minio;
 
-
 import com.ngleanhvu.candidate.infra.config.MinioProperties;
 import com.ngleanhvu.candidate.infra.exception.MinioStorageException;
 import com.ngleanhvu.common.storage.FileStorage;

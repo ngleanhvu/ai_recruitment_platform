@@ -1,6 +1,5 @@
 package com.ngleanhvu.candidate.domain.model.candidate;
 
-
 import com.ngleanhvu.common.exception.ValidationException;
 import com.ngleanhvu.common.util.ValidationUtil;
 import lombok.Builder;

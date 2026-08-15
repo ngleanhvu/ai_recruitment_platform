@@ -1,6 +1,5 @@
 package com.ngleanhvu.candidate.domain.model.candidate.enums;
 
-
 import com.ngleanhvu.common.util.ValidationUtil;
 import jakarta.validation.ValidationException;
 

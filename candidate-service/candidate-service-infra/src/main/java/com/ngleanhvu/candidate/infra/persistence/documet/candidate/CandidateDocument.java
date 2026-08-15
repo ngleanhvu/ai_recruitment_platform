@@ -1,9 +1,8 @@
 package com.ngleanhvu.candidate.infra.persistence.documet.candidate;
 
 import com.ngleanhvu.candidate.domain.model.candidate.*;
-import java.util.List;
-
 import com.ngleanhvu.common.entity.BaseEntity;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

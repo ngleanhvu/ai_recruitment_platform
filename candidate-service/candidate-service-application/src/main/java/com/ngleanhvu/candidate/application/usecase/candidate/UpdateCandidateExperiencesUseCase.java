@@ -6,9 +6,8 @@ import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.model.candidate.Experience;
 import com.ngleanhvu.candidate.domain.repository.CandidateRepository;
-import java.util.List;
-
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service

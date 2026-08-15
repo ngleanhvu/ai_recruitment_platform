@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 public record UpdateCandidateEducationUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
   public void execute(CandidateId candidateId, List<EducationRequest> request) {
-    Candidate candidate = candidateRepository
-        .findById(candidateId)
-        .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+    Candidate candidate =
+        candidateRepository
+            .findById(candidateId)
+            .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
     List<Education> educations = request.stream().map(candidateMapper::toEducation).toList();
     candidate.updateEducations(educations);
     candidateRepository.save(candidate);

@@ -35,14 +35,14 @@ public record CandidateController(
   @GetMapping("/{candidateId}/get-detail")
   public ApiResponse<CandidateDetailResponse> getCandidateDetail(
       @PathVariable("candidateId") String candidateId) {
-    CandidateDetailResponse candidateDetailResponse = getCandidateDetailUseCase.execute(new CandidateId(candidateId));
+    CandidateDetailResponse candidateDetailResponse =
+        getCandidateDetailUseCase.execute(new CandidateId(candidateId));
     return ApiResponse.success("Get candidate detail success", candidateDetailResponse);
   }
 
   @PutMapping("/{candidateId}/update-skills")
   public ApiResponse<Void> updateSkills(
-      @RequestBody List<SkillRequest> skills,
-      @PathVariable("candidateId") String candidateId) {
+      @RequestBody List<SkillRequest> skills, @PathVariable("candidateId") String candidateId) {
     updateCandidateSkillUseCase.execute(new CandidateId(candidateId), skills);
     return ApiResponse.success("Update skill for candidate success", null);
   }

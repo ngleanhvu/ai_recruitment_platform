@@ -15,9 +15,10 @@ public record UpdateCandidateSkillUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
 
   public void execute(CandidateId candidateId, List<SkillRequest> request) {
-    Candidate candidate = candidateRepository
-        .findById(candidateId)
-        .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+    Candidate candidate =
+        candidateRepository
+            .findById(candidateId)
+            .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
 
     List<Skill> skills = request.stream().map(candidateMapper::toSkill).toList();
 
