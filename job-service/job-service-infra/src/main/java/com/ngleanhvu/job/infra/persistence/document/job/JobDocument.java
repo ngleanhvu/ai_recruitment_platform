@@ -3,7 +3,7 @@ package com.ngleanhvu.job.infra.persistence.document.job;
 import com.ngleanhvu.job.domain.model.job.JobRequirements;
 import com.ngleanhvu.job.domain.model.job.SalaryRange;
 import com.ngleanhvu.job.domain.model.job.WorkPlace;
-import com.ngleanhvu.shared.entity.BaseEntity;
+import com.ngleanhvu.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -27,6 +27,6 @@ public class JobDocument extends BaseEntity {
     private JobRequirements requirements;
     private List<String> benefits;
     private String status;
-    private LocalDateTime  applicationDeadline;
+    private LocalDateTime applicationDeadline;
     private LocalDateTime publishedAt;
 }

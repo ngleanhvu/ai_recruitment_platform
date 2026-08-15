@@ -7,7 +7,7 @@ import com.ngleanhvu.job.domain.model.job.JobId;
 import com.ngleanhvu.job.domain.model.job.enums.EmploymentType;
 import com.ngleanhvu.job.domain.model.job.enums.JobStatus;
 import com.ngleanhvu.job.infra.persistence.document.job.JobDocument;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.util.ValidationUtil;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
@@ -53,9 +53,10 @@ public class JobDocumentMapper {
         List<Benefit> benefits = jobDocument.getBenefits().stream()
                 .map(Benefit::new)
                 .toList();
-        ApplicationDeadline deadline = !ValidationUtil.isNull(jobDocument.getApplicationDeadline()) ?
-                new ApplicationDeadline(jobDocument.getApplicationDeadline()) : null;
-        return new  Job(
+        ApplicationDeadline deadline = !ValidationUtil.isNull(jobDocument.getApplicationDeadline())
+                ? new ApplicationDeadline(jobDocument.getApplicationDeadline())
+                : null;
+        return new Job(
                 new JobId(jobDocument.getId()),
                 jobDocument.getRecruiterId(),
                 jobDocument.getTitle(),
@@ -67,7 +68,6 @@ public class JobDocumentMapper {
                 benefits,
                 JobStatus.valueOf(jobDocument.getStatus()),
                 deadline,
-                jobDocument.getPublishedAt()
-        );
+                jobDocument.getPublishedAt());
     }
 }

@@ -6,7 +6,7 @@ import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.model.candidate.Skill;
 import com.ngleanhvu.candidate.domain.repository.CandidateRepository;
-import com.ngleanhvu.shared.exception.ResourceNotFoundException;
+import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,9 @@ public record UpdateCandidateSkillUseCase(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) {
 
   public void execute(CandidateId candidateId, List<SkillRequest> request) {
-    Candidate candidate =
-        candidateRepository
-            .findById(candidateId)
-            .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+    Candidate candidate = candidateRepository
+        .findById(candidateId)
+        .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
 
     List<Skill> skills = request.stream().map(candidateMapper::toSkill).toList();
 

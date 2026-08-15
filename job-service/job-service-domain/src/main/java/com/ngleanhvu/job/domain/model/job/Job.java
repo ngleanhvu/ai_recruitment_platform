@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ngleanhvu.shared.exception.BusinessException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.BusinessException;
+import com.ngleanhvu.common.util.ValidationUtil;
 import lombok.Getter;
 
 @Getter
@@ -26,9 +26,9 @@ public final class Job {
   private LocalDateTime publishedAt;
 
   public Job(JobId jobId, String recruiterId, String title, String description,
-             EmploymentType employmentType, WorkPlace workplace, SalaryRange salary,
-             JobRequirements requirements, List<Benefit> benefits, JobStatus status,
-             ApplicationDeadline deadline, LocalDateTime publishedAt) {
+      EmploymentType employmentType, WorkPlace workplace, SalaryRange salary,
+      JobRequirements requirements, List<Benefit> benefits, JobStatus status,
+      ApplicationDeadline deadline, LocalDateTime publishedAt) {
     this.jobId = jobId;
     this.recruiterId = recruiterId;
     this.title = title;
@@ -44,44 +44,41 @@ public final class Job {
   }
 
   public static Job create(String recruiterId, String title,
-                           String description, EmploymentType employmentType,
-                           WorkPlace workplace) {
+      String description, EmploymentType employmentType,
+      WorkPlace workplace) {
     return new Job(
-            new JobId(JobId.generate().value()),
-            recruiterId,
-            title,
-            description,
-            employmentType,
-            workplace,
-            null,
-            null,
-            null,
-            JobStatus.DRAFT,
-            null,
-            null
-    );
+        new JobId(JobId.generate().value()),
+        recruiterId,
+        title,
+        description,
+        employmentType,
+        workplace,
+        null,
+        null,
+        null,
+        JobStatus.DRAFT,
+        null,
+        null);
   }
 
   public static Job rehydrate(
-          JobId jobId, String recruiterId, String title, String description,
-          EmploymentType employmentType, WorkPlace workplace, SalaryRange salary,
-          JobRequirements requirements, List<Benefit> benefits, JobStatus status,
-          ApplicationDeadline deadline, LocalDateTime publishedAt
-  ) {
+      JobId jobId, String recruiterId, String title, String description,
+      EmploymentType employmentType, WorkPlace workplace, SalaryRange salary,
+      JobRequirements requirements, List<Benefit> benefits, JobStatus status,
+      ApplicationDeadline deadline, LocalDateTime publishedAt) {
     return new Job(
-            jobId,
-            recruiterId,
-            title,
-            description,
-            employmentType,
-            workplace,
-            salary,
-            requirements,
-            benefits,
-            status,
-            deadline,
-            publishedAt
-    );
+        jobId,
+        recruiterId,
+        title,
+        description,
+        employmentType,
+        workplace,
+        salary,
+        requirements,
+        benefits,
+        status,
+        deadline,
+        publishedAt);
   }
 
   public void publish() {
@@ -109,11 +106,10 @@ public final class Job {
   }
 
   public void updateInformation(
-          String title,
-          String description,
-          EmploymentType employmentType,
-          WorkPlace workplace
-  ) {
+      String title,
+      String description,
+      EmploymentType employmentType,
+      WorkPlace workplace) {
     if (!ensureEditable())
       return;
     this.title = title;
@@ -142,7 +138,7 @@ public final class Job {
 
   public boolean isAcceptingApplications() {
     return status == JobStatus.PUBLISHED
-            && !deadline.isExpired();
+        && !deadline.isExpired();
   }
 
   private boolean ensureEditable() {

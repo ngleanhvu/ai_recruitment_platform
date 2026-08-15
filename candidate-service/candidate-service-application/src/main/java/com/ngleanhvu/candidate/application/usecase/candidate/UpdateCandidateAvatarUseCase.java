@@ -3,13 +3,14 @@ package com.ngleanhvu.candidate.application.usecase.candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.repository.CandidateRepository;
-import com.ngleanhvu.shared.exception.FileStorageException;
-import com.ngleanhvu.shared.exception.ResourceNotFoundException;
-import com.ngleanhvu.shared.storage.FileExtensionUtil;
-import com.ngleanhvu.shared.storage.FileStorage;
-import com.ngleanhvu.shared.storage.MinioObjectKey;
-import com.ngleanhvu.shared.util.ImageUtil;
 import java.io.IOException;
+
+import com.ngleanhvu.common.exception.FileStorageException;
+import com.ngleanhvu.common.exception.ResourceNotFoundException;
+import com.ngleanhvu.common.storage.FileExtensionUtil;
+import com.ngleanhvu.common.storage.FileStorage;
+import com.ngleanhvu.common.storage.MinioObjectKey;
+import com.ngleanhvu.common.util.ImageUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

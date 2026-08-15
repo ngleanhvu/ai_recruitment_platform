@@ -1,12 +1,13 @@
 package com.ngleanhvu.job.domain.model.job;
 
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 import java.util.UUID;
 
 public record JobId(String value) {
   public JobId {
-    if (ValidationUtil.isEmpty(value)) throw new ValidationException("Job id must not be empty");
+    if (ValidationUtil.isEmpty(value))
+      throw new ValidationException("Job id must not be empty");
   }
 
   public static JobId generate() {

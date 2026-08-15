@@ -1,6 +1,7 @@
 package com.ngleanhvu.candidate.infra.exception;
 
-import com.ngleanhvu.shared.exception.BaseException;
+
+import com.ngleanhvu.common.exception.BaseException;
 
 public class MinioStorageException extends BaseException {
   public MinioStorageException(String msg) {

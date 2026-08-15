@@ -1,12 +1,12 @@
 package com.ngleanhvu.candidate.domain.model.candidate;
 
 import com.ngleanhvu.candidate.domain.model.candidate.enums.CandidateStatus;
-import com.ngleanhvu.shared.exception.BusinessException;
-import com.ngleanhvu.shared.exception.DomainException;
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ngleanhvu.common.exception.BusinessException;
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 import lombok.Getter;
 
 @Getter

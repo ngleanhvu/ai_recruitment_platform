@@ -5,7 +5,7 @@ import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.model.candidate.enums.CandidateStatus;
 import com.ngleanhvu.candidate.domain.model.candidate.Email;
 import com.ngleanhvu.candidate.infra.persistence.documet.candidate.CandidateDocument;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.util.ValidationUtil;
 import org.springframework.stereotype.Component;
 
 @Component

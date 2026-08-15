@@ -7,9 +7,9 @@ import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.model.candidate.Email;
 import com.ngleanhvu.candidate.domain.model.candidate.Profile;
 import com.ngleanhvu.candidate.domain.repository.CandidateRepository;
-import com.ngleanhvu.shared.exception.ResourceAlreadyExistException;
-import com.ngleanhvu.shared.exception.ResourceNotFoundException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.ResourceAlreadyExistException;
+import com.ngleanhvu.common.exception.ResourceNotFoundException;
+import com.ngleanhvu.common.util.ValidationUtil;
 import org.springframework.stereotype.Service;
 
 @Service

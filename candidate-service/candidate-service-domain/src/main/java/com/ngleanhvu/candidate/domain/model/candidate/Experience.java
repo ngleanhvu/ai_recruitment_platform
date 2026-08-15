@@ -1,8 +1,9 @@
 package com.ngleanhvu.candidate.domain.model.candidate;
 
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
 import java.time.LocalDate;
+
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 import lombok.Builder;
 
 @Builder
