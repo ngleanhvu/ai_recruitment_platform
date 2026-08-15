@@ -9,11 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Document(collection = "resumes")
 public class ResumeDocument {
-    @Id
-    private String id;
-    private String candidateId;
-    private Integer version;
-    private String fileName;
-    private String fileKey;
-    private String status;
+  @Id private String id;
+  private String candidateId;
+  private Integer version;
+  private String fileName;
+  private String fileKey;
+  private String status;
 }

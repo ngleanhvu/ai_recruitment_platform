@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public record ActivateCandidateUseCase(CandidateRepository candidateRepository) {
   public void execute(CandidateId candidateId) {
-    Candidate candidate = candidateRepository
-        .findById(candidateId)
-        .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
+    Candidate candidate =
+        candidateRepository
+            .findById(candidateId)
+            .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
     candidate.activate();
     candidateRepository.save(candidate);
   }

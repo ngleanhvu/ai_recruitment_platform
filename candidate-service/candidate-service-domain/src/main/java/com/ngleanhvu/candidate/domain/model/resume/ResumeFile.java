@@ -1,16 +1,13 @@
 package com.ngleanhvu.candidate.domain.model.resume;
 
-import com.ngleanhvu.shared.exception.ValidationException;
-import com.ngleanhvu.shared.util.ValidationUtil;
+import com.ngleanhvu.common.exception.ValidationException;
+import com.ngleanhvu.common.util.ValidationUtil;
 
-public record ResumeFile(
-        String fileName,
-        String fileKey
-) {
-    public ResumeFile {
-        if (ValidationUtil.isEmpty(fileKey))
-            throw new ValidationException("File key must not be empty");
-        if (ValidationUtil.isEmpty(fileName))
-            throw new ValidationException("File name must not be empty");
-    }
+public record ResumeFile(String fileName, String fileKey) {
+  public ResumeFile {
+    if (ValidationUtil.isEmpty(fileKey))
+      throw new ValidationException("File key must not be empty");
+    if (ValidationUtil.isEmpty(fileName))
+      throw new ValidationException("File name must not be empty");
+  }
 }
