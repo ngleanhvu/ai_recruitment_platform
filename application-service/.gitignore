@@ -1,0 +1,17 @@
+# Docker volumes
+**/data/
+
+# MongoDB data
+**/mongodb_data/
+
+# Logs
+*.log
+
+# Build
+target/
+application-service-application/target
+application-service-domain/target
+application-service-infra/target
+application-service-start/target
+application-service-interface/target
+.mvn

@@ -1,12 +1,12 @@
-name: Candidate Service CI
+name: Job Service CI
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - 'candidate-service/**'
-      - '.github/workflows/candidate-service-ci.yml'
+      - 'job-service/**'
+      - '.github/workflows/job-service-ci.yml'
 
 jobs:
   test:
@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: candidate-service
+        working-directory: job-service
 
     steps:
       - name: Checkout
@@ -27,7 +27,7 @@ jobs:
           distribution: temurin
           java-version: '23'
           cache: maven
-          cache-dependency-path: candidate-service/pom.xml
+          cache-dependency-path: job-service/pom.xml
 
       - name: Check formatting
         run: mvn spotless:check
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: candidate-service/target/site/jacoco/
+          path: job-service/target/site/jacoco/
           if-no-files-found: warn
 
       - name: Upload test reports
@@ -48,5 +48,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: candidate-service/target/surefire-reports/
+          path: job-service/target/surefire-reports/
           if-no-files-found: warn
