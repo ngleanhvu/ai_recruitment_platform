@@ -1,8 +1,8 @@
 package com.ngleanhvu.job.infra.persistence.repository.impl;
 
+import com.ngleanhvu.job.application.port.output.JobRepository;
 import com.ngleanhvu.job.domain.model.job.Job;
 import com.ngleanhvu.job.domain.model.job.JobId;
-import com.ngleanhvu.job.domain.repository.JobRepository;
 import com.ngleanhvu.job.infra.persistence.document.job.JobDocument;
 import com.ngleanhvu.job.infra.persistence.mapper.JobDocumentMapper;
 import com.ngleanhvu.job.infra.persistence.repository.JobMongoRepository;

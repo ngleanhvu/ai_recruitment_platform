@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Document(collection = "applications")
@@ -20,4 +22,5 @@ public final class ApplicationDocument extends BaseEntity {
     private String coverLetter;
     private String source;
     private MatchingResult matching;
+    private LocalDateTime uploadAt;
 }

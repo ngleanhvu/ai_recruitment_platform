@@ -2,8 +2,8 @@ package com.ngleanhvu.candidate.interfaces.rest;
 
 import com.ngleanhvu.candidate.application.dto.request.*;
 import com.ngleanhvu.candidate.application.dto.response.CandidateDetailResponse;
-import com.ngleanhvu.candidate.application.usecase.candidate.*;
-import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
+import com.ngleanhvu.candidate.application.port.input.candidate.*;
+import com.ngleanhvu.candidate.domain.candidate.CandidateId;
 import com.ngleanhvu.common.response.ApiResponse;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

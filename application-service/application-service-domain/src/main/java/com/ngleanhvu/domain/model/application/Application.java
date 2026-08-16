@@ -4,6 +4,8 @@ import com.ngleanhvu.domain.model.application.enums.ApplicationStatus;
 import com.ngleanhvu.domain.model.application.enums.Source;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public final class Application {
     private final ApplicationId id;
@@ -14,10 +16,12 @@ public final class Application {
     private final Source source;
     private final ApplicationStatus status;
     private final MatchingResult matching;
+    private final LocalDateTime uploadAt;
 
     public Application(ApplicationId id, String candidateId, String resumeId,
                        String jobId, String coverLetter, Source source,
-                       ApplicationStatus status, MatchingResult matching) {
+                       ApplicationStatus status, MatchingResult matching,
+                       LocalDateTime uploadAt) {
         this.id = id;
         this.candidateId = candidateId;
         this.resumeId = resumeId;
@@ -26,6 +30,7 @@ public final class Application {
         this.source = source;
         this.status = status;
         this.matching = matching;
+        this.uploadAt = uploadAt;
     }
 
     public static Application create(
@@ -44,7 +49,8 @@ public final class Application {
                 coverLetter,
                 source,
                 status,
-                null
+                null,
+                LocalDateTime.now()
         );
     }
 }

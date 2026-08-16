@@ -22,7 +22,8 @@ public class ApplicationDocumentMapper {
                 document.getCoverLetter(),
                 Source.from(document.getSource()),
                 ApplicationStatus.from(document.getStatus()),
-                document.getMatching()
+                document.getMatching(),
+                document.getUploadAt()
         );
     }
 
@@ -40,6 +41,7 @@ public class ApplicationDocumentMapper {
         document.setSource(domain.getSource().name());
         document.setStatus(domain.getStatus().name());
         document.setMatching(domain.getMatching());
+        document.setUploadAt(domain.getUploadAt());
         return document;
     }
 }

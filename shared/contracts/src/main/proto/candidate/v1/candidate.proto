@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package candidate.v1;
+
+option java_package = "com.ngleanhvu.grpc.candidate.v1";
+option java_multiple_files = true;
+
+service CandidateService {
+  rpc ExistsCandidateById(ExistsCandidateByIdRequest)
+      returns (ExistsCandidateByIdResponse);
+}
+
+message ExistsCandidateByIdRequest {
+  string candidate_id = 1;
+}
+
+message ExistsCandidateByIdResponse {
+  bool exists = 1;
+}

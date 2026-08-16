@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service JobService {
+  rpc ExistsJobById(ExistsJobByIdRequest)
+      returns (ExistsJobByIdResponse);
+}
+
+message ExistsJobByIdRequest {
+  string job_id = 1;
+}
+
+message ExistsJobByIdResponse {
+  bool exists = 1;
+}

@@ -1,9 +1,9 @@
 package com.ngleanhvu.candidate.infra.persistence.mapper;
 
-import com.ngleanhvu.candidate.domain.model.candidate.Candidate;
-import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
-import com.ngleanhvu.candidate.domain.model.candidate.Email;
-import com.ngleanhvu.candidate.domain.model.candidate.enums.CandidateStatus;
+import com.ngleanhvu.candidate.domain.candidate.Candidate;
+import com.ngleanhvu.candidate.domain.candidate.CandidateId;
+import com.ngleanhvu.candidate.domain.candidate.Email;
+import com.ngleanhvu.candidate.domain.candidate.enums.CandidateStatus;
 import com.ngleanhvu.candidate.infra.persistence.documet.candidate.CandidateDocument;
 import com.ngleanhvu.common.util.ValidationUtil;
 import org.springframework.stereotype.Component;

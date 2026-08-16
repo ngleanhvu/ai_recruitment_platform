@@ -1,9 +1,9 @@
 package com.ngleanhvu.candidate.infra.persistence.repository.impl;
 
-import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
-import com.ngleanhvu.candidate.domain.model.resume.Resume;
-import com.ngleanhvu.candidate.domain.model.resume.ResumeId;
-import com.ngleanhvu.candidate.domain.repository.ResumeRepository;
+import com.ngleanhvu.candidate.application.port.output.resume.ResumeRepository;
+import com.ngleanhvu.candidate.domain.candidate.CandidateId;
+import com.ngleanhvu.candidate.domain.resume.Resume;
+import com.ngleanhvu.candidate.domain.resume.ResumeId;
 import com.ngleanhvu.candidate.infra.persistence.documet.resume.ResumeDocument;
 import com.ngleanhvu.candidate.infra.persistence.mapper.ResumeDocumentMapper;
 import com.ngleanhvu.candidate.infra.persistence.repository.ResumeMongoRepository;

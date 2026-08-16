@@ -1,6 +1,7 @@
 package com.ngleanhvu.candidate.application.dto.response;
 
-import com.ngleanhvu.candidate.domain.model.candidate.*;
+import com.ngleanhvu.candidate.domain.candidate.*;
+
 import java.util.List;
 import lombok.Builder;
 
