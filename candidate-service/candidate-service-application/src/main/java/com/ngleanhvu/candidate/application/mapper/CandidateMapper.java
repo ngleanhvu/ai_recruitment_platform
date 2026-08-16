@@ -2,7 +2,7 @@ package com.ngleanhvu.candidate.application.mapper;
 
 import com.ngleanhvu.candidate.application.dto.request.*;
 import com.ngleanhvu.candidate.application.dto.response.CandidateDetailResponse;
-import com.ngleanhvu.candidate.domain.model.candidate.*;
+import com.ngleanhvu.candidate.domain.candidate.*;
 import org.springframework.stereotype.Component;
 
 @Component

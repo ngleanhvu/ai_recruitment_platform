@@ -18,3 +18,8 @@ application:
   mongodb:
     uri: ${APPLICATION_MONGO_URI}
     database: ${APPLICATION_MONGO_DATABASE}
+
+candidate:
+  grpc:
+    host: localhost
+    port: 9091

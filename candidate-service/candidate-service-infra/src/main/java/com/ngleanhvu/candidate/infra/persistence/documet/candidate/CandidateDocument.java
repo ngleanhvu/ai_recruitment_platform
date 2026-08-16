@@ -1,6 +1,6 @@
 package com.ngleanhvu.candidate.infra.persistence.documet.candidate;
 
-import com.ngleanhvu.candidate.domain.model.candidate.*;
+import com.ngleanhvu.candidate.domain.candidate.*;
 import com.ngleanhvu.common.entity.BaseEntity;
 import java.util.List;
 import lombok.Getter;

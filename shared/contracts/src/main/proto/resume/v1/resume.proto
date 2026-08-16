@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service ResumeService {
+  rpc ExistsResumeByIdAndCandidateId(ExistsResumeByIdAndCandidateIdRequest)
+      returns (ExistsResumeByIdAndCandidateIdResponse);
+}
+
+message ExistsResumeByIdAndCandidateIdRequest {
+  string resume_id = 1;
+  string candidate_id = 2;
+}
+
+message ExistsResumeByIdAndCandidateIdResponse {
+  bool exists = 1;
+}

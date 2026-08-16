@@ -20,11 +20,6 @@
     <dependencies>
         <dependency>
             <groupId>com.ngleanhvu</groupId>
-            <artifactId>candidate-service-infra</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ngleanhvu</groupId>
             <artifactId>candidate-service-domain</artifactId>
             <version>${project.version}</version>
         </dependency>

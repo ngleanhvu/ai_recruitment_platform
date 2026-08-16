@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ngleanhvu</groupId>
-            <artifactId>candidate-service-domain</artifactId>
+            <artifactId>candidate-service-application</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

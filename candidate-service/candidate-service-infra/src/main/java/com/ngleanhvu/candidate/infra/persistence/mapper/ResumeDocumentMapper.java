@@ -1,10 +1,10 @@
 package com.ngleanhvu.candidate.infra.persistence.mapper;
 
-import com.ngleanhvu.candidate.domain.model.candidate.CandidateId;
-import com.ngleanhvu.candidate.domain.model.resume.Resume;
-import com.ngleanhvu.candidate.domain.model.resume.ResumeFile;
-import com.ngleanhvu.candidate.domain.model.resume.ResumeId;
-import com.ngleanhvu.candidate.domain.model.resume.enums.ResumeStatus;
+import com.ngleanhvu.candidate.domain.candidate.CandidateId;
+import com.ngleanhvu.candidate.domain.resume.Resume;
+import com.ngleanhvu.candidate.domain.resume.ResumeFile;
+import com.ngleanhvu.candidate.domain.resume.ResumeId;
+import com.ngleanhvu.candidate.domain.resume.enums.ResumeStatus;
 import com.ngleanhvu.candidate.infra.persistence.documet.resume.ResumeDocument;
 import org.springframework.stereotype.Component;
 
