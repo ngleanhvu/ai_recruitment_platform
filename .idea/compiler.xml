@@ -19,7 +19,7 @@
         </processorPath>
         <module name="common" />
       </profile>
-      <profile name="Annotation profile for application-service" enabled="true">
+      <profile name="Annotation profile for job-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -37,8 +37,8 @@
         <module name="candidate-service-application" />
         <module name="candidate-service-interface" />
         <module name="job-service-application" />
-        <module name="job-service-infra" />
         <module name="candidate-service-domain" />
+        <module name="job-service-infra" />
         <module name="job-service-start" />
         <module name="candidate-service-infra" />
       </profile>

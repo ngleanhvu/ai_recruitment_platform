@@ -1,9 +1,9 @@
 package com.ngleanhvu.job.infra.persistence.document.job;
 
+import com.ngleanhvu.common.entity.BaseEntity;
 import com.ngleanhvu.job.domain.model.job.JobRequirements;
 import com.ngleanhvu.job.domain.model.job.SalaryRange;
 import com.ngleanhvu.job.domain.model.job.WorkPlace;
-import com.ngleanhvu.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;

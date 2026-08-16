@@ -1,4 +1,4 @@
-package com.ngleanhvu.job.domain.repository;
+package com.ngleanhvu.job.application.port.output;
 
 import com.ngleanhvu.job.domain.model.job.Job;
 import com.ngleanhvu.job.domain.model.job.JobId;
