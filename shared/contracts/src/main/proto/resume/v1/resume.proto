@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+option java_package = "com.ngleanhvu.grpc.resume.v1";
+option java_multiple_files = true;
+
 service ResumeService {
   rpc ExistsResumeByIdAndCandidateId(ExistsResumeByIdAndCandidateIdRequest)
       returns (ExistsResumeByIdAndCandidateIdResponse);

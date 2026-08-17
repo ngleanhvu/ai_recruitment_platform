@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface JobRepository {
     void save(Job job);
     Optional<Job> findById(JobId id);
+    boolean existsById(JobId jobId);
 }

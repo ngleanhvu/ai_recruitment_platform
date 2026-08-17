@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public record GetCandidateDetailService(
     CandidateRepository candidateRepository, CandidateMapper candidateMapper) implements GetCandidateDetailUseCase {
+
+  @Override
   public CandidateDetailResponse execute(CandidateId candidateId) {
     Candidate candidate =
         candidateRepository

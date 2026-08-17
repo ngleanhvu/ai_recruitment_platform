@@ -23,6 +23,11 @@
             <artifactId>application-service-infra</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.ngleanhvu</groupId>
+            <artifactId>application-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

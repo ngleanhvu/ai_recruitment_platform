@@ -9,6 +9,12 @@
           <option value="candidate-service-infra" />
           <option value="candidate-service-interface" />
           <option value="candidate-service-application" />
+          <option value="application-service-interface" />
+          <option value="application-service-start" />
+          <option value="candidate-service-start" />
+          <option value="application-service-application" />
+          <option value="candidate-service-interface" />
+          <option value="job-service-interface" />
         </list>
       </option>
       <option name="ignoredPackages">
@@ -17,10 +23,22 @@
           <option value="org.bouncycastle:bcprov-jdk18on:1.81" />
           <option value="org.bouncycastle:bcprov-jdk18on:1.81" />
           <option value="org.bouncycastle:bcprov-jdk18on:1.81" />
+          <option value="io.grpc:grpc-netty-shaded:1.74.0" />
+          <option value="io.grpc:grpc-netty-shaded:1.74.0" />
+          <option value="io.grpc:grpc-netty-shaded:1.63.0" />
+          <option value="io.grpc:grpc-netty-shaded:1.74.0" />
+          <option value="io.grpc:grpc-netty-shaded:1.63.0" />
+          <option value="io.grpc:grpc-netty-shaded:1.63.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />
           <option value="Not exploitable" />

@@ -16,4 +16,6 @@ public interface ResumeRepository {
   Optional<Resume> findLatestByCandidateId(CandidateId candidateId);
 
   Integer getNextVersion(CandidateId candidateId);
+
+  boolean existsByIdAndCandidateId(ResumeId resumeId, CandidateId candidateId);
 }

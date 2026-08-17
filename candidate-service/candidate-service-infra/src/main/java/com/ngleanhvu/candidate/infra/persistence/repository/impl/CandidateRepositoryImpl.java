@@ -8,17 +8,21 @@ import com.ngleanhvu.candidate.infra.persistence.documet.candidate.CandidateDocu
 import com.ngleanhvu.candidate.infra.persistence.mapper.CandidateDocumentMapper;
 import com.ngleanhvu.candidate.infra.persistence.repository.CandidateMongoRepository;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class CandidateRepositoryImpl implements CandidateRepository {
 
   private final CandidateMongoRepository candidateMongoRepository;
   private final CandidateDocumentMapper candidateDocumentMapper;
+
+  public CandidateRepositoryImpl(CandidateMongoRepository candidateMongoRepository,
+                                 CandidateDocumentMapper candidateDocumentMapper) {
+    this.candidateMongoRepository = candidateMongoRepository;
+    this.candidateDocumentMapper = candidateDocumentMapper;
+  }
 
   @Override
   public void save(Candidate candidate) {

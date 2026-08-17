@@ -24,4 +24,6 @@ public class CandidateGrpc extends CandidateServiceGrpc.CandidateServiceImplBase
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+
 }

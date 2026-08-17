@@ -30,4 +30,9 @@ public final class JobRepositoryImpl implements JobRepository {
     public Optional<Job> findById(JobId id) {
         return jobMongoRepository.findById(id.value()).map(jobDocumentMapper::toDomain);
     }
+
+    @Override
+    public boolean existsById(JobId jobId) {
+        return jobMongoRepository.existsById(jobId.value());
+    }
 }
