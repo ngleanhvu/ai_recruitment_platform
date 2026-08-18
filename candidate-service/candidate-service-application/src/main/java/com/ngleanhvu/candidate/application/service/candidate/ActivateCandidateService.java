@@ -1,14 +1,15 @@
 package com.ngleanhvu.candidate.application.service.candidate;
 
 import com.ngleanhvu.candidate.application.port.input.candidate.ActivateCandidateUseCase;
+import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.candidate.domain.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.candidate.CandidateId;
-import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public record ActivateCandidateService(CandidateRepository candidateRepository) implements ActivateCandidateUseCase {
+public record ActivateCandidateService(CandidateRepository candidateRepository)
+    implements ActivateCandidateUseCase {
   public void execute(CandidateId candidateId) {
     Candidate candidate =
         candidateRepository

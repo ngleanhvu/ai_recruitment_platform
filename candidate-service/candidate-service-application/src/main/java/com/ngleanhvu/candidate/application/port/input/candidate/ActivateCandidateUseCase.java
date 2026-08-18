@@ -3,5 +3,5 @@ package com.ngleanhvu.candidate.application.port.input.candidate;
 import com.ngleanhvu.candidate.domain.candidate.CandidateId;
 
 public interface ActivateCandidateUseCase {
-    void execute(CandidateId candidateId);
+  void execute(CandidateId candidateId);
 }

@@ -18,8 +18,9 @@ public class CandidateRepositoryImpl implements CandidateRepository {
   private final CandidateMongoRepository candidateMongoRepository;
   private final CandidateDocumentMapper candidateDocumentMapper;
 
-  public CandidateRepositoryImpl(CandidateMongoRepository candidateMongoRepository,
-                                 CandidateDocumentMapper candidateDocumentMapper) {
+  public CandidateRepositoryImpl(
+      CandidateMongoRepository candidateMongoRepository,
+      CandidateDocumentMapper candidateDocumentMapper) {
     this.candidateMongoRepository = candidateMongoRepository;
     this.candidateDocumentMapper = candidateDocumentMapper;
   }

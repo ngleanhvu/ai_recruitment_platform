@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/applications")
-public record ApplicationRest (
-        CreateApplicationUseCase createApplicationUseCase
-) {
-    @PostMapping("/create")
-    public ApiResponse<Void> createApplication(@RequestBody CreateApplicationRequest request) {
-        createApplicationUseCase.execute(request);
-        return ApiResponse.success("Create new application success", null);
-    }
+public record ApplicationRest(CreateApplicationUseCase createApplicationUseCase) {
+  @PostMapping("/create")
+  public ApiResponse<Void> createApplication(@RequestBody CreateApplicationRequest request) {
+    createApplicationUseCase.execute(request);
+    return ApiResponse.success("Create new application success", null);
+  }
 }

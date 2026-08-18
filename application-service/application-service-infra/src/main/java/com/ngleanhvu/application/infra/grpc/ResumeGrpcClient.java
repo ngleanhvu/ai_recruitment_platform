@@ -10,21 +10,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResumeGrpcClient implements ResumeGateway {
 
-    private final ResumeServiceGrpc.ResumeServiceBlockingStub stub;
+  private final ResumeServiceGrpc.ResumeServiceBlockingStub stub;
 
-    public ResumeGrpcClient(ManagedChannel resumeManagedChannel) {
-        this.stub = ResumeServiceGrpc.newBlockingStub(resumeManagedChannel);
-    }
+  public ResumeGrpcClient(ManagedChannel resumeManagedChannel) {
+    this.stub = ResumeServiceGrpc.newBlockingStub(resumeManagedChannel);
+  }
 
-    @Override
-    public boolean existsResumeByIdAndCandidateId(String resumeId, String candidateId) {
-        ExistsResumeByIdAndCandidateIdRequest request = ExistsResumeByIdAndCandidateIdRequest.newBuilder()
-                .setCandidateId(candidateId)
-                .setResumeId(resumeId)
-                .build();
+  @Override
+  public boolean existsResumeByIdAndCandidateId(String resumeId, String candidateId) {
+    ExistsResumeByIdAndCandidateIdRequest request =
+        ExistsResumeByIdAndCandidateIdRequest.newBuilder()
+            .setCandidateId(candidateId)
+            .setResumeId(resumeId)
+            .build();
 
-        ExistsResumeByIdAndCandidateIdResponse response = stub.existsResumeByIdAndCandidateId(request);
+    ExistsResumeByIdAndCandidateIdResponse response = stub.existsResumeByIdAndCandidateId(request);
 
-        return response.getExists();
-    }
+    return response.getExists();
+  }
 }

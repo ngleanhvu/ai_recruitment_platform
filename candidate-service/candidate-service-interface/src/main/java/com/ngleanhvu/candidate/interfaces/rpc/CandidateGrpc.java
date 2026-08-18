@@ -12,18 +12,17 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @GrpcService
 @RequiredArgsConstructor
 public class CandidateGrpc extends CandidateServiceGrpc.CandidateServiceImplBase {
-    private final ExistCandidateByIdUseCase existCandidateByIdUseCase;
+  private final ExistCandidateByIdUseCase existCandidateByIdUseCase;
 
-    @Override
-    public void existsCandidateById(ExistsCandidateByIdRequest request, StreamObserver<ExistsCandidateByIdResponse> responseObserver) {
-        CandidateId candidateId = new CandidateId(request.getCandidateId());
-        boolean exists = existCandidateByIdUseCase.execute(candidateId);
-        ExistsCandidateByIdResponse response = ExistsCandidateByIdResponse.newBuilder()
-                .setExists(exists)
-                .build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-
+  @Override
+  public void existsCandidateById(
+      ExistsCandidateByIdRequest request,
+      StreamObserver<ExistsCandidateByIdResponse> responseObserver) {
+    CandidateId candidateId = new CandidateId(request.getCandidateId());
+    boolean exists = existCandidateByIdUseCase.execute(candidateId);
+    ExistsCandidateByIdResponse response =
+        ExistsCandidateByIdResponse.newBuilder().setExists(exists).build();
+    responseObserver.onNext(response);
+    responseObserver.onCompleted();
+  }
 }

@@ -12,16 +12,15 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @GrpcService
 @RequiredArgsConstructor
 public class JobGrpc extends JobServiceGrpc.JobServiceImplBase {
-    private final JobRepository jobRepository;
+  private final JobRepository jobRepository;
 
-    @Override
-    public void existsJobById(ExistsJobByIdRequest request, StreamObserver<ExistsJobByIdResponse> responseObserver) {
-        JobId jobId = new JobId(request.getJobId());
-        boolean exists = jobRepository.existsById(jobId);
-        ExistsJobByIdResponse response = ExistsJobByIdResponse.newBuilder()
-                .setExists(exists)
-                .build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
+  @Override
+  public void existsJobById(
+      ExistsJobByIdRequest request, StreamObserver<ExistsJobByIdResponse> responseObserver) {
+    JobId jobId = new JobId(request.getJobId());
+    boolean exists = jobRepository.existsById(jobId);
+    ExistsJobByIdResponse response = ExistsJobByIdResponse.newBuilder().setExists(exists).build();
+    responseObserver.onNext(response);
+    responseObserver.onCompleted();
+  }
 }

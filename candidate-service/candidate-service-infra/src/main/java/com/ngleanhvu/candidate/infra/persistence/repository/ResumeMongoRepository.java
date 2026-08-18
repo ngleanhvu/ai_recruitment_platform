@@ -4,7 +4,6 @@ import com.ngleanhvu.candidate.infra.persistence.documet.resume.ResumeDocument;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 public interface ResumeMongoRepository extends MongoRepository<ResumeDocument, String> {
   List<ResumeDocument> findByCandidateIdOrderByVersionDesc(String candidateId);

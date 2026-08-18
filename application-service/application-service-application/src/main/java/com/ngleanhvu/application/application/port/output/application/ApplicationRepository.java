@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface ApplicationRepository {
   void save(Application application);
+
   Optional<Application> findById(ApplicationId id);
 }

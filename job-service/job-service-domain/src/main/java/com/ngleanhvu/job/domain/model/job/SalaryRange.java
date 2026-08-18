@@ -1,8 +1,8 @@
 package com.ngleanhvu.job.domain.model.job;
 
-import com.ngleanhvu.job.domain.model.job.enums.Currency;
 import com.ngleanhvu.common.exception.ValidationException;
 import com.ngleanhvu.common.util.ValidationUtil;
+import com.ngleanhvu.job.domain.model.job.enums.Currency;
 import java.math.BigDecimal;
 
 public record SalaryRange(BigDecimal min, BigDecimal max, Currency currency) {
