@@ -32,11 +32,14 @@ jobs:
       - name: Check formatting
         run: mvn spotless:check
 
+      - name: Build shared
+        run: mvn -f ../shared/pom.xml clean install -DskipTests
+
       - name: Build common
         run: mvn -f ../shared/common/pom.xml clean install -DskipTests
 
       - name: Test job service
-        run: mvn -f ../job-service/pom.xml clean verify
+        run: mvn -f pom.xml clean verify
 
       - name: Upload JaCoCo report
         if: always()

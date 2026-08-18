@@ -32,6 +32,9 @@ jobs:
       - name: Check formatting
         run: mvn spotless:check
 
+      - name: Build shared
+        run: mvn -f ../shared/pom.xml clean install -DskipTests
+
       - name: Build common
         run: mvn -f ../shared/common/pom.xml clean install -DskipTests
 
