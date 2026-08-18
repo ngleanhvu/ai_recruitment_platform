@@ -8,6 +8,7 @@ import com.ngleanhvu.candidate.domain.resume.Resume;
 import com.ngleanhvu.candidate.domain.resume.ResumeFile;
 import com.ngleanhvu.candidate.domain.resume.ResumeId;
 import com.ngleanhvu.candidate.domain.resume.enums.ResumeStatus;
+import com.ngleanhvu.common.constant.BucketConstant;
 import com.ngleanhvu.common.exception.FileStorageException;
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import com.ngleanhvu.common.storage.FileExtensionUtil;
@@ -36,7 +37,7 @@ public record UploadResumeService(
 
     ResumeId resumeId = ResumeId.generate();
 
-    String newResumeKey = MinioObjectKey.key("resumes", resumeId.value(), "resume", extension);
+    String newResumeKey = MinioObjectKey.key(BucketConstant.CANDIDATES_SOURCE, resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
 
     try {
       fileStorage.upload(
@@ -52,7 +53,7 @@ public record UploadResumeService(
 
     } catch (IOException e) {
       fileStorage.delete(newResumeKey);
-      throw new FileStorageException("Failed to upload candidate avatar");
+      throw new FileStorageException("Failed to upload candidate resume");
     }
   }
 }
