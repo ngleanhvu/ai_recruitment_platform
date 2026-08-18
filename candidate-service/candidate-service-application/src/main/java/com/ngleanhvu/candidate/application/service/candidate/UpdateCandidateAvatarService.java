@@ -4,6 +4,7 @@ import com.ngleanhvu.candidate.application.port.input.candidate.UpdateCandidateA
 import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.candidate.domain.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.candidate.CandidateId;
+import com.ngleanhvu.common.constant.BucketConstant;
 import com.ngleanhvu.common.exception.FileStorageException;
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import com.ngleanhvu.common.storage.FileExtensionUtil;
@@ -30,7 +31,7 @@ public record UpdateCandidateAvatarService(
     String extension = FileExtensionUtil.getExtension(file);
 
     String newAvatarKey =
-        MinioObjectKey.key("candidates", candidateId.value(), "avatar", extension);
+        MinioObjectKey.key(BucketConstant.CANDIDATES_SOURCE, candidateId.value(), BucketConstant.CANDIDATES_AVATAR, extension);
 
     String oldAvatarKey = candidate.getProfile().avatarKey();
 
