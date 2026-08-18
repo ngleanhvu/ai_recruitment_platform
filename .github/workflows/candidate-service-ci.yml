@@ -36,7 +36,7 @@ jobs:
         run: mvn -f ../shared/common/pom.xml clean install -DskipTests
 
       - name: Test candidate service
-        run: mvn -f candidate-service/pom.xml clean verify
+        run: mvn -f ../candidate-service/pom.xml clean verify
 
       - name: Upload JaCoCo report
         if: always()
