@@ -3,11 +3,11 @@ package com.ngleanhvu.candidate.application.service.candidate;
 import com.ngleanhvu.candidate.application.dto.request.ProfileRequest;
 import com.ngleanhvu.candidate.application.mapper.CandidateMapper;
 import com.ngleanhvu.candidate.application.port.input.candidate.UpdateCandidateProfileUseCase;
+import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.candidate.domain.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.candidate.CandidateId;
 import com.ngleanhvu.candidate.domain.candidate.Email;
 import com.ngleanhvu.candidate.domain.candidate.Profile;
-import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.common.exception.ResourceAlreadyExistException;
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import com.ngleanhvu.common.util.ValidationUtil;
@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public record UpdateCandidateProfileService(
-    CandidateRepository candidateRepository, CandidateMapper candidateMapper) implements UpdateCandidateProfileUseCase {
+    CandidateRepository candidateRepository, CandidateMapper candidateMapper)
+    implements UpdateCandidateProfileUseCase {
   public void execute(CandidateId candidateId, ProfileRequest request) {
     Profile profile = candidateMapper.toProfile(request);
     Email email = new Email(request.email());

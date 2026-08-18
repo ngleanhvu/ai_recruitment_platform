@@ -1,9 +1,9 @@
 package com.ngleanhvu.candidate.application.service.candidate;
 
 import com.ngleanhvu.candidate.application.port.input.candidate.UpdateCandidateAvatarUseCase;
+import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.candidate.domain.candidate.Candidate;
 import com.ngleanhvu.candidate.domain.candidate.CandidateId;
-import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
 import com.ngleanhvu.common.exception.FileStorageException;
 import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import com.ngleanhvu.common.storage.FileExtensionUtil;
@@ -16,7 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public record UpdateCandidateAvatarService(
-    CandidateRepository candidateRepository, FileStorage fileStorage) implements UpdateCandidateAvatarUseCase {
+    CandidateRepository candidateRepository, FileStorage fileStorage)
+    implements UpdateCandidateAvatarUseCase {
   public void execute(CandidateId candidateId, MultipartFile file) {
 
     Candidate candidate =

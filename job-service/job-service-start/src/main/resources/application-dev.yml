@@ -18,3 +18,7 @@ job:
   mongodb:
     uri: ${JOB_MONGO_URI}
     database: ${JOB_MONGO_DATABASE}
+
+grpc:
+  server:
+    port: ${GRPC_JOB_SERVER_PORT}

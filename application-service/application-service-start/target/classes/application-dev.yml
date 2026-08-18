@@ -21,5 +21,10 @@ application:
 
 candidate:
   grpc:
-    host: localhost
-    port: 9091
+    host: ${CANDIDATE_GRPC_HOST}
+    port: ${CANDIDATE_GRPC_PORT}
+
+job:
+  grpc:
+    host: ${JOB_GRPC_HOST}
+    port: ${JOB_GRPC_PORT}

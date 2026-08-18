@@ -50,4 +50,9 @@ public class ResumeRepositoryImpl implements ResumeRepository {
   public Integer getNextVersion(CandidateId candidateId) {
     return resumeMongoRepository.countByCandidateId(candidateId.value());
   }
+
+  @Override
+  public boolean existsByIdAndCandidateId(ResumeId resumeId, CandidateId candidateId) {
+    return resumeMongoRepository.existsByIdAndCandidateId(resumeId.value(), candidateId.value());
+  }
 }

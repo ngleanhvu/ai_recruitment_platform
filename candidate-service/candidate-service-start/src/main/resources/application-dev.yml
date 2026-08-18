@@ -7,6 +7,10 @@ server:
 spring:
   application:
     name: candidate-service
+  data:
+    mongodb:
+      uri: ${CANDIDATE_MONGO_URI}
+      database: ${CANDIDATE_MONGO_DATABASE}
 
 logging:
   level:
@@ -14,17 +18,12 @@ logging:
     org.mongodb.driver: WARN
     org.springframework.data.mongodb: WARN
 
-candidate:
-  mongodb:
-    uri: ${CANDIDATE_MONGO_URI}
-    database: ${CANDIDATE_MONGO_DATABASE}
-
 minio:
   endpoint: ${MINIO_ENDPOINT}
   access-key: ${MINIO_ACCESS_KEY}
   secret-key: ${MINIO_SECRET_KEY}
   bucket: ${MINIO_BUCKET}
 
-gprc:
+grpc:
   server:
-    port: ${GRPC_SERVER_PORT}
+    port: ${GRPC_CANDIDATE_SERVER_PORT}

@@ -3,15 +3,16 @@ package com.ngleanhvu.candidate.application.service.candidate;
 import com.ngleanhvu.candidate.application.dto.request.CreateCandidateFromResumeRequest;
 import com.ngleanhvu.candidate.application.mapper.CandidateMapper;
 import com.ngleanhvu.candidate.application.port.input.candidate.CreateCandidateFromResumeUseCase;
-import com.ngleanhvu.candidate.domain.candidate.*;
 import com.ngleanhvu.candidate.application.port.output.candidate.CandidateRepository;
+import com.ngleanhvu.candidate.domain.candidate.*;
 import com.ngleanhvu.common.exception.ResourceAlreadyExistException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public record CreateCandidateFromResumeService(
-    CandidateRepository candidateRepository, CandidateMapper candidateMapper) implements CreateCandidateFromResumeUseCase {
+    CandidateRepository candidateRepository, CandidateMapper candidateMapper)
+    implements CreateCandidateFromResumeUseCase {
   public void execute(CreateCandidateFromResumeRequest request) {
     Email email = new Email(request.profile().email());
     boolean existedByEmail = candidateRepository.existByEmail(email);

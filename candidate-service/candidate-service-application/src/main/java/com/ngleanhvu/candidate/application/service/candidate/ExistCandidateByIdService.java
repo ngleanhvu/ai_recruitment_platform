@@ -6,12 +6,11 @@ import com.ngleanhvu.candidate.domain.candidate.CandidateId;
 import org.springframework.stereotype.Service;
 
 @Service
-public record ExistCandidateByIdService (
-        CandidateRepository candidateRepository
-) implements ExistCandidateByIdUseCase {
+public record ExistCandidateByIdService(CandidateRepository candidateRepository)
+    implements ExistCandidateByIdUseCase {
 
-    @Override
-    public boolean execute(CandidateId candidateId) {
-        return candidateRepository.existById(candidateId);
-    }
+  @Override
+  public boolean execute(CandidateId candidateId) {
+    return candidateRepository.existById(candidateId);
+  }
 }
