@@ -33,7 +33,7 @@ jobs:
         run: mvn spotless:check
 
       - name: Build common
-        run: mvn -f common/pom.xml clean install -DskipTests
+        run: mvn -f ../common/pom.xml clean install -DskipTests
 
       - name: Test application service
         run: mvn -f application-service/pom.xml clean verify
