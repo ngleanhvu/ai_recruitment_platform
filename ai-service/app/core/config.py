@@ -1,15 +1,22 @@
 from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     app_name: str = "ai-service"
     app_env: str = "local"
-    app_port: int = 8002
+    app_port: int = 8004
 
     max_file_size_mb: int = 10
 
-    openai_api_key: str | None = None
+    minio_endpoint: str
+    minio_access_key: str
+    minio_secret_key: str
+    minio_bucket: str
+    minio_secure: bool = False
+
+    openai_api_key: str
     openai_model: str = "gpt-4o-mini"
 
     model_config = SettingsConfigDict(
