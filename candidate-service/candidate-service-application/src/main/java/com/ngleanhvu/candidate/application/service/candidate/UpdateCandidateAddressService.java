@@ -21,5 +21,6 @@ public record UpdateCandidateAddressService(
             .findById(candidateId)
             .orElseThrow(() -> new ResourceNotFoundException("Candidate not found"));
     candidate.updateAddress(address);
+    candidateRepository.save(candidate);
   }
 }

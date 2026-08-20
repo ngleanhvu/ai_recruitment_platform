@@ -8,13 +8,11 @@ public final class MinioObjectKey {
     }
 
     public static String key(
-            String source,
             String id,
             String type,
             String extension
     ) {
-        return "%s/%s/%s/%s.%s".formatted(
-                source,
+        return "%s/%s/%s.%s".formatted(
                 id,
                 type,
                 UUID.randomUUID(),

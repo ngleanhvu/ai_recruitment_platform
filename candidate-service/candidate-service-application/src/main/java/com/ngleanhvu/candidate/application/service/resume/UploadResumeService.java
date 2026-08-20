@@ -30,14 +30,12 @@ public record UploadResumeService(
     boolean existsCandidate = candidateRepository().existById(candidateId);
     if (!existsCandidate) throw new ResourceNotFoundException("Candidate not found");
 
-    ImageUtil.validateImage(file);
-
     String extension = FileExtensionUtil.getExtension(file);
     String fileName = FileExtensionUtil.getFilename(file);
 
     ResumeId resumeId = ResumeId.generate();
 
-    String newResumeKey = MinioObjectKey.key(BucketConstant.CANDIDATES_SOURCE, resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
+    String newResumeKey = MinioObjectKey.key(resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
 
     try {
       fileStorage.upload(
