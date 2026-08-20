@@ -4,7 +4,7 @@ from app.services.extraction_service import ExtractionService
 
 
 router = APIRouter(
-    prefix="/api/v1/resumes",
+    prefix="/api/v1/ai/resumes",
     tags=["Resume"],
 )
 

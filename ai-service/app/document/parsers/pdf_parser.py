@@ -1,29 +1,23 @@
-import fitz
+import io
+from pypdf import PdfReader
 
 from app.document.parsers.base import DocumentParser
-from app.utils.text_utils import normalize_text
 
 
 class PdfParser(DocumentParser):
 
-    SUPPORTED_EXTENSION = ".pdf"
-
     def supports(self, extension: str) -> bool:
-        return extension.lower() == self.SUPPORTED_EXTENSION
+        return extension == ".pdf"
 
-    def extract_text(self, file_path: str) -> str:
-        document = fitz.open(file_path)
+    def extract_text(self, file_bytes: bytes) -> str:
+        reader = PdfReader(io.BytesIO(file_bytes))
 
-        try:
-            pages = []
+        text = []
 
-            for page in document:
-                text = page.get_text()
+        for page in reader.pages:
+            page_text = page.extract_text()
 
-                if text:
-                    pages.append(text)
+            if page_text:
+                text.append(page_text)
 
-            return normalize_text("\n".join(pages))
-
-        finally:
-            document.close()
+        return "\n".join(text)

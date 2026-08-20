@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("api/v1/resumes")
+@RequestMapping("api/v1/candidates")
 public record ResumeRest(UploadResumeUseCase uploadResumeUseCase) {
-  @PostMapping("/upload")
+  @PostMapping("/{candidateId}/resume/upload")
   public ApiResponse<Void> uploadResume(
       @RequestPart("file") MultipartFile file, @PathVariable("candidateId") String candidateId) {
     uploadResumeUseCase.execute(new CandidateId(candidateId), file);

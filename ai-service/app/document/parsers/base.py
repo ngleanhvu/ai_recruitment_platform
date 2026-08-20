@@ -8,5 +8,5 @@ class DocumentParser(ABC):
         pass
 
     @abstractmethod
-    def extract_text(self, file_path: str) -> str:
+    def extract_text(self, file_bytes: bytes) -> str:
         pass

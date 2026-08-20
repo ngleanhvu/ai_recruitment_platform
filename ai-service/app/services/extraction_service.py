@@ -16,12 +16,10 @@ class ExtractionService:
         file_key: str,
     ) -> ExtractedCandidateSchema:
 
-        file_bytes = self.storage.get_file(
-            file_key
-        )
+        file_bytes = self.storage.get_file(file_key)
 
         resume_text = self.document_service.extract_text(
-            file_key=file_key,
+            file_name=file_key,
             file_bytes=file_bytes,
         )
 

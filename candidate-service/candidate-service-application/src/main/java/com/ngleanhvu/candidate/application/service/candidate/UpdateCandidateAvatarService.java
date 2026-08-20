@@ -31,7 +31,7 @@ public record UpdateCandidateAvatarService(
     String extension = FileExtensionUtil.getExtension(file);
 
     String newAvatarKey =
-        MinioObjectKey.key(BucketConstant.CANDIDATES_SOURCE, candidateId.value(), BucketConstant.CANDIDATES_AVATAR, extension);
+        MinioObjectKey.key(candidateId.value(), BucketConstant.CANDIDATES_AVATAR, extension);
 
     String oldAvatarKey = candidate.getProfile().avatarKey();
 
