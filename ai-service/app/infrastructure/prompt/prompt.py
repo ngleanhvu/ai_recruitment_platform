@@ -8,7 +8,7 @@ def load_resume_extraction_prompt(
     resume_text: str,
 ) -> str:
 
-    prompt_path = PROMPT_DIR / "resume_extraction.txt"
+    prompt_path = PROMPT_DIR / "resume_extraction.md"
 
     template = prompt_path.read_text(
         encoding="utf-8"

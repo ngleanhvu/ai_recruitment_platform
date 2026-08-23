@@ -1,7 +1,7 @@
 import io
 from pypdf import PdfReader
 
-from app.document.parsers.base import DocumentParser
+from app.infrastructure.parsers.base import DocumentParser
 
 
 class PdfParser(DocumentParser):

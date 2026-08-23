@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from app.api.routers.resume import router as resume_router
-from app.core.config import get_settings
+from app.presentation.http.resume import router as resume_router
+from app.config import get_settings
 
 
 settings = get_settings()

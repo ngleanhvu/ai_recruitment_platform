@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.services.extraction_service import ExtractionService
+from app.application.resume.extraction_service import ExtractionService
 
 
 router = APIRouter(
