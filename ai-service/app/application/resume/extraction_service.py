@@ -1,7 +1,7 @@
-from app.ai.openai_client import OpenAIClient
-from app.document.document_service import DocumentService
+from app.infrastructure.prompt.openai_client import OpenAIClient
+from app.infrastructure.parsers.document_service import DocumentService
 from app.infrastructure.storage.minio_client import MinioStorage
-from app.schemas.candidate import ExtractedCandidateSchema
+from app.domain.schemas.candidate import ExtractedCandidateSchema
 
 
 class ExtractionService:

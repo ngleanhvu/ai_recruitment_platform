@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from app.document.parsers.base import DocumentParser
-from app.document.parsers.docx_parser import DocxParser
-from app.document.parsers.pdf_parser import PdfParser
+from app.infrastructure.parsers.base import DocumentParser
+from app.infrastructure.parsers.docx_parser import DocxParser
+from app.infrastructure.parsers.pdf_parser import PdfParser
 
 
 class DocumentService:

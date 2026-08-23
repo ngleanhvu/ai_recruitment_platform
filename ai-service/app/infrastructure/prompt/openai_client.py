@@ -1,8 +1,8 @@
 from openai import AsyncOpenAI
 
-from app.ai.prompt import load_resume_extraction_prompt
-from app.core.config import get_settings
-from app.schemas.candidate import ExtractedCandidateSchema
+from app.infrastructure.prompt.prompt import load_resume_extraction_prompt
+from app.config import get_settings
+from app.domain.schemas.candidate import ExtractedCandidateSchema
 
 
 class OpenAIClient:

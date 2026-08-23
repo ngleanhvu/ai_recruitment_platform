@@ -1,7 +1,7 @@
 import io
 from docx import Document
 
-from app.document.parsers.base import DocumentParser
+from app.infrastructure.parsers.base import DocumentParser
 
 
 class DocxParser(DocumentParser):
