@@ -14,7 +14,6 @@ import com.ngleanhvu.common.exception.ResourceNotFoundException;
 import com.ngleanhvu.common.storage.FileExtensionUtil;
 import com.ngleanhvu.common.storage.FileStorage;
 import com.ngleanhvu.common.storage.MinioObjectKey;
-import com.ngleanhvu.common.util.ImageUtil;
 import java.io.IOException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +34,8 @@ public record UploadResumeService(
 
     ResumeId resumeId = ResumeId.generate();
 
-    String newResumeKey = MinioObjectKey.key(resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
+    String newResumeKey =
+        MinioObjectKey.key(resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
 
     try {
       fileStorage.upload(
