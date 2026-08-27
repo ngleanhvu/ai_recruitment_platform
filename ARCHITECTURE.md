@@ -1,54 +1,94 @@
 # Architecture
 
-## Verified current design
+This document describes the architecture visible in the repository. Deployed topology, production values, and external platform behavior remain unknown unless represented by checked-in configuration.
 
-This repository contains independently built Maven reactors for candidate, job, and application services, plus a separate FastAPI AI service. Each Java service has `domain`, `application`, `infra`, `interface`, and `start` modules (`candidate-service/pom.xml`, `job-service/pom.xml`, and `application-service/pom.xml`).
+## System context
 
-The Java boot applications component-scan those layers and enable service-specific Mongo repositories (`candidate-service/candidate-service-start/src/main/java/com/ngleanhvu/candidate/start/StartApplication.java`, `job-service/job-service-start/src/main/java/com/ngleanhvu/job/start/StartApplication.java`, and `application-service/application-service-start/src/main/java/com/ngleanhvu/application/start/StartApplication.java`).
-
-`shared/contracts` defines candidate, resume, and job protobuf APIs. Candidate and job expose gRPC services; application-service has gRPC clients for candidate, resume, and job validation. Candidate-service also configures MinIO for file storage. The AI service exposes FastAPI routes and a health endpoint.
+The repository contains four independently runnable services and two shared Java artifacts.
 
 ```text
 HTTP clients
-  |--> candidate-service --> MongoDB, MinIO
-  |--> job-service -------> MongoDB
-  |--> application-service -> MongoDB
-                               |-- gRPC --> candidate-service
-                               |-- gRPC --> job-service
-  |--> ai-service --------> AI provider + MinIO (configured)
+  |-- candidate-service ----> candidate MongoDB
+  |                           MinIO
+  |                           gRPC CandidateService + ResumeService
+  |
+  |-- job-service ----------> job MongoDB
+  |                           gRPC JobService
+  |
+  |-- application-service --> application MongoDB
+  |          |-- gRPC ------> candidate-service
+  |          `-- gRPC ------> job-service
+  |
+  `-- ai-service -----------> MinIO
+                              OpenAI API
 
-shared/common: common Java utilities and API errors
-shared/contracts: protobuf source shared by Java services
+shared/common     Java cross-cutting types
+shared/contracts  protobuf source of truth
 ```
 
-## Layering rule
+`candidate-service`, `job-service`, and `application-service` are separate Maven reactors targeting Java 23 and Spring Boot 4.0.6. `ai-service` is a separate Python/FastAPI application.
 
-The Java services follow a ports-and-adapters style:
+## Java service structure
 
-| Layer | Owns | May depend on |
+Each Java bounded context uses ports and adapters with five modules:
+
+| Module | Owns | Dependency rule |
 | --- | --- | --- |
-| `domain` | entities, value objects, domain rules | domain code only |
-| `application` | use cases, input/output ports, DTOs | domain |
-| `interface` | REST and gRPC inbound adapters | application |
-| `infra` | Mongo, MinIO, and gRPC outbound adapters | application ports and external libraries |
-| `start` | application bootstrap and configuration | all service modules |
+| `*-domain` | aggregates, entities, value objects, domain invariants | no framework or adapter dependency |
+| `*-application` | use cases, DTOs, mappers, input/output ports | depends on domain |
+| `*-interface` | REST controllers and gRPC server adapters | depends on application and contracts as needed |
+| `*-infra` | Mongo repositories, MinIO, gRPC clients, external configuration | implements application output ports |
+| `*-start` | Spring Boot entry point and runtime wiring | composes interface and infra |
 
-## Integration contracts
+The intended dependency shape is:
 
-- REST controllers are versioned under `/api/v1` in the Java services.
-- Protobuf source is the source of truth for gRPC communication. Preserve existing field numbers and prefer additive changes.
-- Environment-specific Java configuration is externalized through variables in each `application-dev.yml`. The AI service reads settings from environment variables (and a local `.env` file).
+```text
+interface ----> application ----> domain
+infra --------> application ----> domain
+   \              /
+    `--- start ---'
+```
 
-## Important constraints and gaps
+Spring component scanning in each `StartApplication` connects the layers. Mongo repository scanning is limited to the owning service's infra package.
 
-- The repository has Java CI workflows for candidate, job, and application service changes, but no AI-service CI workflow.
-- No repository tests were present at the time this document was added; the Maven projects nevertheless enforce JaCoCo coverage checks during `verify`.
-- Dockerfiles should be verified before use: their copy/build paths do not visibly match the multi-module service layout. This is a deployment readiness item, not an assertion that an image currently fails.
-- Production topology, authentication/authorization, observability backend, and actual deployed database settings are not represented here and must be verified with the deployment owner.
+## Bounded contexts
 
-## Change guidance
+### Candidate
 
-1. Keep business rules in the owning service's domain/application modules.
-2. Introduce an application output port before adding an external integration.
-3. For a new cross-service call, version its protobuf API, add provider and consumer tests, and define timeout/error behavior.
-4. Do not make another service's database a dependency; communicate through its APIs/contracts.
+Owns candidate profiles and resumes. REST controllers expose candidate lifecycle/profile operations and resume upload. Mongo adapters persist candidate and resume documents; MinIO stores files. The service provides candidate-existence and candidate/resume-association checks through gRPC.
+
+### Job
+
+Owns job requirements and lifecycle. REST controllers handle job commands, Mongo adapters persist job documents, and the service provides a job-existence check through gRPC.
+
+### Application
+
+Owns submitted applications. Its create use case checks resume ownership and job existence through application output ports implemented by blocking gRPC clients, then persists an application. It must not read candidate or job databases directly.
+
+### AI
+
+Exposes `/health` and `/api/v1/ai/resumes/extract`. The extraction flow downloads a file from MinIO, parses PDF/DOCX text, and sends extracted text to an OpenAI-backed client for structured candidate data. HTTP concerns live under `presentation`, orchestration under `application`, schemas under `domain`, and provider/storage/parser code under `infrastructure`.
+
+## Contracts and compatibility
+
+- Java REST endpoints are under `/api/v1`.
+- `shared/contracts/src/main/proto/{candidate,job,resume}/v1` is the gRPC source of truth.
+- Protobuf changes should be additive. Never change the meaning of an existing field, reuse a field number, or remove a field without reserving its name and number.
+- A breaking contract change requires coordinated provider/consumer changes, deployment ordering, and rollback constraints.
+
+## Data and security boundaries
+
+- Each Java service owns a separate logical MongoDB configuration.
+- Candidate-service and AI-service use MinIO; shared bucket/object ownership conventions are not yet formally specified.
+- Resume content and candidate profiles are sensitive personal data. Do not place them in logs, test fixtures copied from production, or AI prompts beyond the minimum required processing path.
+- Authentication, authorization, audit policy, retention, encryption policy, and production secret management are not defined in this repository and require explicit design before production use.
+
+## Known gaps
+
+- Automated Java tests currently exist only for candidate domain/application code; job, application, and AI test suites are absent.
+- Java CI exists for the three Java services; no AI-service CI is checked in.
+- gRPC deadlines, retry policy, and consistent failure translation are not visibly configured on the blocking clients.
+- Production deployment manifests, observability backends, SLOs, and rollback automation are not checked in.
+- The root compose file supplies MinIO only; MongoDB and the external AI provider must be supplied separately.
+
+Record consequential decisions in `docs/decisions/` and update this file when component ownership, dependency direction, or system integrations change.

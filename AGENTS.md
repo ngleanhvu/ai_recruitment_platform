@@ -1,107 +1,80 @@
-# AI Agent Instructions
+# Repository Agent Contract
 
-This file is the repository-level operating contract for coding agents and automation.
+These instructions apply to the entire repository. Read the nearest nested `AGENTS.md` for component-specific rules, then use `ARCHITECTURE.md` and the relevant file under `docs/` as durable context.
+
+## Read before changing code
+
+1. Inspect `git status` and preserve unrelated worktree changes.
+2. Read `ARCHITECTURE.md`, the owning component's `AGENTS.md`, its parent POM or Python requirements, runtime configuration, and nearby tests.
+3. Trace the behavior from an inbound adapter through the use case/domain and any outbound port before choosing the edit location.
+4. Keep the change inside one bounded context unless the request explicitly requires a shared-contract or cross-service change.
 
 ## Repository map
 
-- `candidate-service/`, `job-service/`, and `application-service/` are independent Maven reactor projects. Each has `domain`, `application`, `infra`, `interface`, and `start` modules.
-- `shared/contracts/` owns versioned protobuf contracts. `shared/common/` owns shared Java utilities and exception/response types.
-- `ai-service/` is a separate Python/FastAPI application.
-- `.github/workflows/` contains path-scoped CI for the three Java services.
-- `envirnoment/docker-compose-dev.yml` starts the shared local MinIO dependency. Keep the existing spelling when referring to that path.
+- `candidate-service/`: candidate profiles, resumes, MongoDB persistence, MinIO storage, REST, and gRPC.
+- `job-service/`: job lifecycle, MongoDB persistence, REST, and gRPC.
+- `application-service/`: job applications, MongoDB persistence, and gRPC clients for candidate/resume/job checks.
+- `ai-service/`: FastAPI resume extraction using MinIO and an OpenAI client.
+- `shared/contracts/`: versioned protobuf source shared by Java services.
+- `shared/common/`: shared Java exceptions, responses, entities, validation, and storage abstractions.
+- `docs/`: development, testing, operational, and decision records.
+- `envirnoment/docker-compose-dev.yml`: shared local MinIO compose file. The misspelling is an existing path; do not silently rename it.
 
-## Architecture boundaries
+## Non-negotiable boundaries
 
-For a Java service, preserve the dependency direction:
+- Java dependencies flow inward: `interface` and `infra` depend on `application`; `application` depends on `domain`; `start` performs wiring. Domain code must not import Spring, MongoDB, HTTP, gRPC, MinIO, or persistence types.
+- Put business rules in `domain`, orchestration and ports in `application`, inbound protocol mapping in `interface`, external adapters in `infra`, and bootstrap/configuration in `start`.
+- A service owns its data. Never query another service's MongoDB directly; use a versioned API or gRPC contract.
+- Treat REST payloads and `shared/contracts/src/main/proto/**` as public compatibility surfaces. Prefer additive changes, never reuse protobuf field numbers, and reserve removed names and numbers.
+- Keep credentials and candidate/resume PII out of source, fixtures, logs, exceptions, prompts, and documentation. Use synthetic test data and environment variables.
+- Do not edit generated protobuf sources, `target/`, `.venv/`, IDE metadata, caches, or `.DS_Store`.
 
-`interface -> application -> domain`
+## Change rules
 
-`infra` implements application output ports; `start` wires modules and runtime configuration. Do not place Spring, MongoDB, HTTP, or gRPC implementation details in `domain`. Add outbound dependencies as application ports first, then implement their adapters in `infra`.
+### Behavior changes
 
-Treat files in `shared/contracts/src/main/proto/` as public APIs. Make protobuf changes additive where possible, retain field numbers, regenerate/compile consumers, and coordinate any breaking change across every service.
+- Reproduce a bug with the smallest focused test when practical; add a regression test with the fix.
+- Reuse existing DTO, mapper, exception, validation, and port patterns before creating new abstractions.
+- Do not weaken tests, coverage, formatting, validation, or security controls to make a check pass.
 
-## Safe workflow
+### Contracts and data
 
-1. Read the closest `AGENTS.md`, the relevant module POM, configuration, and existing tests before editing.
-2. Keep a change within one bounded context unless a contract or explicitly requested cross-service change requires more.
-3. Never commit secrets. Add only placeholder names or documented environment variables; use local `.env` files that are ignored by Git.
-4. Do not modify generated sources, `target/`, IDE files, or `.DS_Store`.
-5. State assumptions when deployment values, external services, or production configuration cannot be verified from the repository.
+- Update provider and consumer code together when compatibility cannot be preserved.
+- For persistence-shape changes, document old-record compatibility, migration/backfill, deployment order, and rollback. Do not run destructive migrations without explicit approval.
+- For external calls, define timeout, retry, idempotency, error mapping, and observability behavior. Retries must be bounded.
 
-## Common change situations
+### Dependencies and configuration
 
-### Fixing a bug
+- Add dependencies only to the module that owns the need; prefer versions managed by the reactor POM.
+- Pin intentional Python dependency changes in `ai-service/requirements.txt`.
+- Document new environment variables in `docs/OPERATIONS.md`. Commit placeholders, never real secrets.
 
-- Reproduce the failure with the smallest focused test before changing production code when practical.
-- Fix the behavior in the layer that owns it; do not hide domain or application defects in a controller, persistence adapter, or exception handler.
-- Add a regression test that fails without the fix. Preserve existing public behavior unless the request explicitly changes it.
+## Validation
 
-### Adding a Java feature
-
-- Start with the owning domain rule or application use case and its input/output ports.
-- Add REST or gRPC handling in `interface`, external-system and persistence adapters in `infra`, and wiring or runtime configuration in `start`.
-- Reuse the owning service's existing DTO, mapper, validation, and error-response conventions before introducing a new abstraction.
-
-### Changing an API or protobuf contract
-
-- Treat REST payloads and protobuf messages as compatibility-sensitive. Prefer optional or additive changes and do not silently rename or remove fields.
-- Never reuse a removed protobuf field number or name; reserve both in the `.proto` file.
-- Update all providers and consumers in the same change when compatibility cannot be preserved. Add contract-focused tests and document rollout order and rollback constraints.
-
-### Changing persistence or data shape
-
-- Keep repository interfaces in `application` and MongoDB documents, repositories, and mapping code in `infra`.
-- Do not access another service's database directly.
-- For a stored-data shape change, describe compatibility with existing records, migration or backfill needs, deployment order, and rollback behavior. Do not run destructive migrations or modify shared data without explicit approval.
-
-### Adding an external or cross-service call
-
-- Define an application output port first and implement the client in `infra`.
-- Specify timeout, retry, idempotency, failure mapping, and observability behavior. Do not add unbounded retries or convert dependency failures into successful responses.
-- Mock the port in application tests; use focused adapter or contract tests for protocol and mapping behavior.
-
-### Changing configuration, secrets, or dependencies
-
-- Use environment variables for environment-specific values and safe placeholders in committed configuration.
-- Document every new variable in the owning configuration and `docs/OPERATIONS.md`, including whether it is required and its safe local default when one exists.
-- Before adding or upgrading a dependency, confirm the owning module needs it, prefer dependency management in the reactor POM, and note compatibility or security impact. Do not perform broad upgrades as part of an unrelated change.
-
-### Working on the AI service
-
-- Keep HTTP schemas and route concerns at the FastAPI boundary, business logic in services, and external provider or storage details behind adapters or dedicated clients.
-- Pin intentional dependency changes in `ai-service/requirements.txt`; do not commit virtual environments, caches, generated artifacts, or local `.env` files.
-- Mock AI providers, MinIO, and network calls in unit tests. Mark tests requiring live services explicitly and do not claim they passed unless those services were actually available.
-
-### Handling tests, failures, and documentation
-
-- Run focused tests while iterating, then the owning service's full validation command before completion. A documentation-only change does not require a full service build.
-- Do not weaken, delete, or disable tests, Spotless, JaCoCo, validation, or security controls merely to make a build pass.
-- If an unrelated pre-existing failure blocks validation, report the exact command and failure and distinguish it from failures caused by the change.
-- Update `README.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`, or `docs/OPERATIONS.md` when the change affects setup, architecture, contribution workflow, configuration, deployment, or rollback.
-
-### When to stop and ask
-
-- Ask before making a breaking public API change, destructive data operation, security-policy change, or cross-service redesign not explicitly requested.
-- Ask when requirements conflict with the architecture boundaries or when production-only values or behavior are required and cannot be verified from repository evidence.
-- Do not overwrite unrelated working-tree changes. If they overlap the required edit and cannot be preserved safely, stop and explain the conflict.
-
-## Validation commands
-
-Run from the repository root unless stated otherwise:
+Build shared artifacts before a Java service in a clean environment:
 
 ```bash
 mvn -f shared/pom.xml clean install -DskipTests
-mvn -f shared/common/pom.xml clean install -DskipTests
 mvn -f candidate-service/pom.xml clean verify
 mvn -f job-service/pom.xml clean verify
 mvn -f application-service/pom.xml clean verify
 ```
 
-For a Java formatting-only repair, run `mvn -f <service>/pom.xml spotless:apply`, then re-run `clean verify` for that service. For AI-service work, create an isolated virtual environment and install from `ai-service/requirements.txt`; add focused tests before claiming behavior is covered.
+During iteration, run the smallest relevant module/test first. Before handoff, run the owning component's full check from its nested `AGENTS.md`. Documentation-only changes require link/content checks, not a full application build.
+
+If a check cannot run because of missing infrastructure or a pre-existing failure, report the exact command and failure; do not claim it passed.
+
+## Code Review Rules
+
+- Flag violations of the layer and service-ownership boundaries above.
+- Flag breaking REST/protobuf changes without a compatibility and rollout plan.
+- Flag unbounded network calls, retries without idempotency analysis, swallowed dependency failures, and missing error mapping.
+- Flag secrets or real applicant data in any committed artifact.
+- Flag behavior changes without focused tests, except when the repository currently lacks the required test harness and the gap is explicitly documented.
 
 ## Definition of done
 
-- Domain, application, adapter, and API changes are aligned.
-- Relevant unit/integration/contract tests exist and pass.
-- Java changes pass `clean verify` (including Spotless and JaCoCo thresholds).
-- Any API, protobuf, configuration, data, security, or operational impact is documented in the pull request and in the appropriate repository document.
+- The implementation is in the owning layer and unrelated worktree changes are untouched.
+- Focused tests cover changed behavior and the owning component's validation passes, or blockers are reported precisely.
+- Contract, configuration, data, security, deployment, and rollback impacts are documented when applicable.
+- `ARCHITECTURE.md` or `docs/` is updated when durable project knowledge changed.

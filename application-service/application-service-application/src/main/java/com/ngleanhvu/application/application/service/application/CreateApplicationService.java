@@ -19,13 +19,12 @@ public record CreateApplicationService(
     JobGateway jobGateway,
     ApplicationMapper applicationMapper)
     implements CreateApplicationUseCase {
+  
   @Override
   public void execute(CreateApplicationRequest request) {
     boolean existResume =
         resumeGateway.existsResumeByIdAndCandidateId(request.resumeId(), request.candidateId());
-    if (!existResume) throw new ResourceNotFoundException("Resume not found");
-    boolean existCandidate = candidateGateway.existsCandidateById(request.candidateId());
-    if (!existCandidate) throw new ResourceNotFoundException("Candidate not found");
+    if (!existResume) throw new ResourceNotFoundException("Resume not found with this candidate");
     boolean existJob = jobGateway().existsJobById(request.jobId());
     if (!existJob) throw new ResourceNotFoundException("Job not found");
     Application application = applicationMapper.toDomain(request);
