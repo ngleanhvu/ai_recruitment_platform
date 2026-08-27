@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-PROMPT_DIR = Path(__file__).resolve().parents[2] / "prompts"
+PROMPT_DIR = Path(__file__).resolve().parents[3] / "prompts"
 
 
 def load_resume_extraction_prompt(

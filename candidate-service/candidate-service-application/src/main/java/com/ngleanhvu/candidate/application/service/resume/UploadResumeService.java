@@ -31,24 +31,17 @@ public record UploadResumeService(
 
     String extension = FileExtensionUtil.getExtension(file);
     String fileName = FileExtensionUtil.getFilename(file);
-
     ResumeId resumeId = ResumeId.generate();
-
     String newResumeKey =
         MinioObjectKey.key(resumeId.value(), BucketConstant.CANDIDATES_RESUME, extension);
 
     try {
       fileStorage.upload(
           newResumeKey, file.getInputStream(), file.getSize(), file.getContentType());
-
       int version = resumeRepository.getNextVersion(candidateId);
-
       ResumeFile resumeFile = new ResumeFile(fileName, newResumeKey);
-
       Resume resume = new Resume(resumeId, candidateId, version, resumeFile, ResumeStatus.ACTIVE);
-
       resumeRepository.save(resume);
-
     } catch (IOException e) {
       fileStorage.delete(newResumeKey);
       throw new FileStorageException("Failed to upload candidate resume");

@@ -1,4 +1,4 @@
-package com.ngleanhvu.candidate.infra.config;
+package com.ngleanhvu.candidate.infra.minio;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

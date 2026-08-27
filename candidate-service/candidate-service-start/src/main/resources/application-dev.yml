@@ -27,3 +27,7 @@ minio:
 grpc:
   server:
     port: ${GRPC_CANDIDATE_SERVER_PORT}
+
+nats:
+  url: ${NATS_URL}
+  connection-name: ${NATS_CONNECTION_NAME:candidate-service}
